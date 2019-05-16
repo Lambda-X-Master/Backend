@@ -1,10 +1,10 @@
-_Note: All text in italics is intructions for your documentation and should eventually be deleted. Use this as a guideline for your docs, not as an absolute format._
+🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
 # API Documentation
 
 #### Back-end Deployment: _add URL here_ <br>
 
-_This is a placeholder, replace the endpoints, accress controll, and descriptioin to match your project_
+🚫This is a placeholder, replace the endpoints, accress controll, and descriptioin to match your project
 
 #### Organization Routes
 
@@ -27,7 +27,7 @@ _This is a placeholder, replace the endpoints, accress controll, and descriptioi
 
 # Data Model
 
-_This is just an example. Replace this with your data model_
+🚫This is just an example. Replace this with your data model
 
 #### ORGANIZATIONS
 
@@ -66,7 +66,7 @@ _This is just an example. Replace this with your data model_
 
 ## Actions
 
-_This is an example, replace this with the actions that pertain to your backend_
+🚫 This is an example, replace this with the actions that pertain to your backend
 
 `getOrgs()` -> Returns all organizations
 
