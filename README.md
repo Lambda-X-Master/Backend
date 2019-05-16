@@ -2,7 +2,7 @@
 
 # API Documentation
 
-#### Back-end Deployment: _add URL here_ <br>
+#### Backend Deployment: _add URL here_ <br>
 
 🚫This is a placeholder, replace the endpoints, accress controll, and descriptioin to match your project
 
