@@ -171,3 +171,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Documentation
 
 See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
+🚫 Add DS iOS and/or Andriod links here if applicable.
