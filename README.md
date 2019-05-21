@@ -6,6 +6,8 @@
 
 # API Documentation
 
+
+
 ## 1️⃣ Getting started
 
 To get the server running locally:
@@ -13,11 +15,20 @@ To get the server running locally:
 🚫 adjust these scripts to match your project
 
 - Clone this repo
-- `yarn install` to install all required dependencies
-- `yarn server` to start the local server
-- `yarn test` to start server using testing environment
+- **yarn install** to install all required dependencies
+- **yarn server** to start the local server
+- **yarn test** to start server using testing environment
 
-#### 1️⃣ [Backend Deployment:](🚫add URL here) <br>
+#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+
+### Backend framework goes here
+
+🚫 Why did you choose this framework?
+
+-    Point One
+-    Point Two
+-    Point Three
+-    Point Four
 
 ## 2️⃣ Endpoints
 
@@ -123,4 +134,4 @@ create a .env file that includes the following:
 
 ## Documentation
 
-See [Frontend Documentation](🚫_link to your frontend readme here_) for details on the fronend of our project.
+See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
