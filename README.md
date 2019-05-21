@@ -1,8 +1,12 @@
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
+🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+
+🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
+
 # API Documentation
 
-## Getting started
+## 1️⃣ Getting started
 
 To get the server running locally:
 
@@ -13,7 +17,9 @@ To get the server running locally:
 - `yarn server` to start the local server
 - `yarn test` to start server using testing environment
 
-#### Backend Deployment: _add URL here_ <br>
+#### 1️⃣ [Backend Deployment:](🚫add URL here) <br>
+
+## 2️⃣ Endpoints
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
@@ -40,7 +46,7 @@ To get the server running locally:
 
 🚫This is just an example. Replace this with your data model
 
-#### ORGANIZATIONS
+#### 2️⃣ ORGANIZATIONS
 
 ---
 
@@ -75,7 +81,7 @@ To get the server running locally:
 }
 ```
 
-## Actions
+## 2️⃣ Actions
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
