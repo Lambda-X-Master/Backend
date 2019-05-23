@@ -6,7 +6,7 @@
 
 # API Documentation
 
-
+#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
 ## 1️⃣ Getting started
 
@@ -18,8 +18,6 @@ To get the server running locally:
 - **yarn install** to install all required dependencies
 - **yarn server** to start the local server
 - **yarn test** to start server using testing environment
-
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
 ### Backend framework goes here
 
