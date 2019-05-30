@@ -1,6 +1,6 @@
 {
     "env": {
-        "GOOGLE_CLOUD_PROJECT": "fir-oauth-node-react"
+        "GOOGLE_CLOUD_PROJECT": "market-organizer-labs13"
     },
     "verbose": true
 }

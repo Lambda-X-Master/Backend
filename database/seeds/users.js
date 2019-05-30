@@ -1,23 +1,36 @@
 const faker = require("faker");
 const bcrypt = require('bcrypt');
 exports.seed = function(knex, Promise) {
-  // Deletes ALL existing entries
+  // const userSeeds = num => {
+  //   const users = [];
+  //   for (let i = 0; i < num; i++) {
+  //     users.push({
 
-  const userSeeds = num => {
-    const users = [];
-    for (let i = 0; i < num; i++) {
-      users.push({
-        password: bcrypt.hashSync("password", 10),
-        firebase_id: faker.random.uuid(),
-        email: faker.internet.email(),
-      });
-    }
-    return users;
-  };
+  //       firebase_id: faker.random.uuid(),
+  //       email: faker.internet.email(),
+  //     });
+  //   }
+  //   return users;
 
-  return knex('users').truncate()
-    .then(function () {
-      // Inserts seed entries
-      return knex('users').insert(userSeeds(500));
-    });
+  function createFakeUser(i) {    
+    const user_type = i % 2 ? "market" : "vendor";
+
+    return {
+      email: faker.internet.email(),
+      firebase_id: faker.random.alphaNumeric(8),      
+      user_type
+    };
+  }
+  const users = [];
+  const numFakes = 502;
+  for (let i = 0; i < numFakes; i++) {
+    users.push(createFakeUser(i));
+  } 
+
+  return (
+    knex("users")     
+      .then(function() {
+        return knex("users").insert(users);
+      })
+  );
 };

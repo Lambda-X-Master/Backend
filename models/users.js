@@ -2,8 +2,7 @@ const db = require('../database/dbconfig');
 
  find = () => {
     return db("users").select(
-      "id",
-      "password",
+      "id",      
       "firebase_id",
       "email",
     );
