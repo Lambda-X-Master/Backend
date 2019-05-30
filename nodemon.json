@@ -1,0 +1,6 @@
+{
+    "env": {
+        "GOOGLE_CLOUD_PROJECT": "fir-oauth-node-react"
+    },
+    "verbose": true
+}
