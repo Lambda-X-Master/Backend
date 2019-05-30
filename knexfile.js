@@ -11,7 +11,13 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: localpg
+    connection: localpg, 
+    migrations: {
+      directory: './database/migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
+    },
   },
 
   staging: {
