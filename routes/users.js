@@ -6,7 +6,10 @@ const router = express.Router();
 const firebaseMiddleware = require("../middleware/firebase.js");
 
 router.get('/', usersController.findUsers)
-router.post("/register", firebaseMiddleware, usersController.registerOrLogin); 
+router.post("/register", usersController.registerOrLogin); 
 router.get("/login", usersController.registerOrLogin);
+
+// router.post("/register", firebaseMiddleware, usersController.registerOrLoginFB);
+// router.get('/login/:id', firebaseMiddleware, usersController.login);
 
 module.exports = router

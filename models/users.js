@@ -39,11 +39,16 @@ function findById(firebase_id) {
   return db("users")
     .where({ firebase_id: firebase_id })
     .first();
+};
+
+function login(email) {
+  return db("users").where({email: email}).first();
 }
 
 module.exports = {
   find,
   registerOrLogin,
   register,
-  findById
+  findById,
+  login
 };
