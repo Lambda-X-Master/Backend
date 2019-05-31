@@ -7,6 +7,8 @@ localpg = {
   user: 'postgres',
   password: process.env.DATABASE_PASSWORD
 }
+
+const productionDbConnection = process.env.DATABASE_URL || localPg;
 module.exports = {
 
   development: {
@@ -45,6 +47,9 @@ module.exports = {
     },
     migrations: {
       directory: './database/migrations'
+    },
+    seeds: {
+      directory: './database/seeds',
     },
   }
 
