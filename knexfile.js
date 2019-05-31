@@ -49,7 +49,7 @@ module.exports = {
       directory: './database/migrations'
     },
     seeds: {
-      directory: './database/seeds',
+      directory: './database/seeds'
     },
   }
 
