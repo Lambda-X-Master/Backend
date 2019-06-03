@@ -21,7 +21,7 @@ exports.up = function(knex, Promise) {
         vendor
           .integer('market_id')
           .unsigned()
-          .notNullable()
+          // .notNullable()
           .references('id')
           .inTable('market')
     })
