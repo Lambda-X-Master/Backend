@@ -45,10 +45,29 @@ function login(email) {
   return db("users").where({email: email}).first();
 }
 
+function updateUser(id, changes) {
+  return db('users').where({firebase_id: id}).update(changes)
+}
+
+async function findByUserType(user) {
+  try {
+    const firebase_id = user.firebase_id;
+    const type = user.user_type;
+    const userTypeData = await db(`${type}`)
+      .where({ firebase_id })
+      .first();
+    return { user, userTypeData };
+  } catch (error) {
+    throw new Error("Could not retrieve usertype information");
+  }
+}
+
 module.exports = {
   find,
   registerOrLogin,
   register,
   findById,
-  login
+  login,
+  updateUser,
+  findByUserType
 };
