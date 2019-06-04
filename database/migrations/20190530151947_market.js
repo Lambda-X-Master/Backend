@@ -10,8 +10,15 @@ exports.up = function(knex, Promise) {
             .references("firebase_id")
             .inTable("users")
             .onUpdate("CASCADE");
-        market.string('name')
-        market.integer('avail_stalls')
+        market.string("market_name");
+        market.string('contact_first_name')
+        market.string('contact_last_name');
+        market.string("address");
+        market.string("city");
+        market.string("state");
+        market.integer("zipcode");
+        market.string("phone_number");
+        market.string("stripeAccountId");
     })
   };
   
