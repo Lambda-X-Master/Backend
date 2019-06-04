@@ -1,6 +1,6 @@
 const express = require('express');
 
-const productsController = require('../controllers/products');
+const productsController = require('../controllers/product');
 
 const router = express.Router();
 const isAuthenticated = require("../middleware/firebase.js");
