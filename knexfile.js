@@ -1,7 +1,7 @@
 // Update with your config settings.
 require('dotenv').config()
 
-localpg = {
+localPg = {
   host: 'localhost',
   database: 'market-organizer',
   user: 'postgres',
@@ -13,7 +13,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: localpg, 
+    connection: localPg, 
     migrations: {
       directory: './database/migrations'
     },
