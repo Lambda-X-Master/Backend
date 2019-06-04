@@ -4,10 +4,10 @@
             stall.increments();
             stall.json('size')
             stall
-              .integer('market_id')
+              .string('market_id')
               .unsigned()
               .notNullable()
-              .references('id')
+              .references('firebase_id')
               .inTable('market')
             stall.boolean("available");
             stall.integer("qty");
