@@ -19,10 +19,10 @@ exports.up = function(knex, Promise) {
         vendor.string('phone_nunmber')
         vendor.string('company_url')
         vendor
-          .integer('market_id')
+          .string('market_id')
           .unsigned()
           // .notNullable()
-          .references('id')
+          .references('firebase_id')
           .inTable('market')
         vendor.string("stripeCustomerId");
     })
