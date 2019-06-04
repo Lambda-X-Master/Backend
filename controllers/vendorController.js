@@ -27,13 +27,29 @@ exports.getVendorById = async (req, res) => {
   }
 };
 
+exports.getVendorByFirebaseId = async (req, res) => {
+    try {
+      const { firebase_id } = req.params;
+      if (firebase_id) {
+        const vendor = await Vendor.getVendorByfirebaseId(firebase_id);
+        res.status(200).json(vendor);
+      } else {
+        res.status(400).json({ message: "No Vendor with that firebase Id" });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: `Vendor could not be found in the database: ${error}` });
+    }
+  };
+
 exports.addVendor = async (req, res) => {
   try {
     const newVendor = req.body;
-    console.log(newVendor);
+    // console.log(newVendor);
     if (newVendor) {
       const vendor = await Vendor.addVendor(newVendor);
-      console.log(vendor, "vendor added");
+    //   console.log(vendor, "vendor added");
       res.status(200).json(vendor);
     } else {
       res.status(400).json({ message: "Must enter all input fields" });

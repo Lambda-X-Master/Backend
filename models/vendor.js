@@ -5,17 +5,36 @@ module.exports = {
   getVendorById,
   addVendor,
   updateVendor,
-  deleteVendor
+  deleteVendor,
+  findVendorBy,
+  getVendorByfirebaseId
 };
 
 function getVendors() {
   return db("vendor");
 }
 
-function getVendorById(firebase_id) {
+function getVendorById(id) {
   return db("vendor")
-    .where({ 'firebase_id': firebase_id })
+    .where({ id })
     .first();
+}
+function getVendorByfirebaseId(firebase_id) {
+    return db("vendor")
+      .where({ 'firebase_id': firebase_id })
+      .first();
+  }
+
+async function findVendorBy(filter) {
+  console.log("Filter: ", filter);
+  try {
+    const vendor = await db("vendor")
+      .where(filter)
+      .first();
+    return vendor;
+  } catch (error) {
+    throw new Error(`Could not find vendor by (${filter})`);
+  }
 }
 
 async function addVendor(vendor) {
@@ -25,6 +44,11 @@ async function addVendor(vendor) {
   return getVendorById(id);
 }
 
+// async function addVendor(vendor) {
+//     const [id] = await db("vendor").insert(vendor, "id");
+//     return findVendorBy({ id });
+//   }
+
 function updateVendor(id, changes) {
   return db("vendor")
     .where({ id: id })
@@ -32,5 +56,7 @@ function updateVendor(id, changes) {
 }
 
 function deleteVendor(id) {
-    return db('vendor').where({ id }).del();
+  return db("vendor")
+    .where({ id })
+    .del();
 }
