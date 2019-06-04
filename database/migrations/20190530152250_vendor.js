@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
         vendor.string('city')
         vendor.string('state')
         vendor.string('zip_code')
-        vendor.string('phone')
+        vendor.string('phone_nunmber')
         vendor.string('company_url')
         vendor
           .integer('market_id')
@@ -24,6 +24,7 @@ exports.up = function(knex, Promise) {
           // .notNullable()
           .references('id')
           .inTable('market')
+        vendor.string("stripeCustomerId");
     })
   };
   
