@@ -5,7 +5,8 @@ localPg = {
   host: 'localhost',
   database: 'market-organizer',
   user: 'postgres',
-  password: process.env.DATABASE_PASSWORD
+  //password: process.env.DATABASE_PASSWORD
+  password: 'password'
 }
 
 const productionDbConnection = process.env.DATABASE_URL || localPg;

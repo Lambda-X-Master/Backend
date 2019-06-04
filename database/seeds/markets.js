@@ -7,9 +7,8 @@ exports.seed = function(knex, Promise) {
           // Inserts seed entries
           knex("market").insert({
             market_name: 'Test Market 1',
-            firebase_id: 'test'
+            firebase_id: 'g2j69qqd'
           })
-          
         ]);
       });
   };
