@@ -3,6 +3,7 @@ const Products = require("../models/product");
 exports.getProductsByVendorId = async (req, res, next) => {
     try {
         const vendor_id = req.params.vendor_id;
+        console.log("Vendor id,", vendor_id);
         if(!vendor_id){
             res.status(404).json({errorMessage: "You are missing a vendor id"})
         }
@@ -25,7 +26,8 @@ exports.addProductByVendorId = async (req, res, next) => {
             res.status(404).json({errorMessage: "You are missing a vendor id"})
         }
         else {
-            const product = req.body; 
+            let product = req.body;
+            console.log("Product: ", product);
             const addedProduct = await Products.addProductByVendorId(product, vendor_id);
             console.log("Added Product:", addedProduct);
             res.status(200).json(addedProduct);
@@ -47,7 +49,11 @@ exports.updateProductByProductId =  async (req, res, next) => {
             const product = req.body; 
             const updatedProduct = await Products.updateProductByProductId(product, product_id);
             console.log("Updated Product:", updatedProduct);
-            res.status(200).json(productData);
+            if(!updatedProduct){
+                res.status(404).json({errorMessage: "This product does not exist"});
+            } else {
+                res.status(200).json(updatedProduct);
+            }
         }
     }
     catch(err) {
@@ -65,7 +71,11 @@ exports.deleteProductByProductId = async (req, res, next) => {
         else {
             const deletedProduct = await Products.deleteProductByProductId(product_id);
             console.log("Deleted Product:", deletedProduct);
-            res.status(200).json(productData);
+            if(!deletedProduct){
+                res.status(404).json({errorMessage: "This product does not exist"});
+            } else {
+                res.status(200).json(deletedProduct);
+            }
         }
     }
     catch(err) {

@@ -11,7 +11,12 @@ async function getProductsByVendorId(vendorId) {
 
 async function addProductByVendorId(product, vendorId) {
     try{
-        return db("product").where({vendor_id: vendorId}).insert(product);
+        let addedProduct = {
+            ...product,
+            vendors_id: vendorId
+        };
+        console.log("Our added product :",addedProduct);
+        return db("product").insert(addedProduct);
     }
     catch(err){
         console.log(err);
@@ -20,6 +25,7 @@ async function addProductByVendorId(product, vendorId) {
 
 async function updateProductByProductId(product, productId) {
     try{
+        console.log("Updated product :", product);
         return db("product").where({id: productId}).update(product);
     }
     catch(err){
