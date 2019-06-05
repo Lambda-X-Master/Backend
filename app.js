@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const usersRoutes = require('./routes/users');
 const vendorRoutes = require('./routes/vendorRoutes.js');
 const productsRoutes = require("./routes/product");
+const marketRoutes = require("./routes/markets");
 const stallsRoutes = require("./routes/stall");
 
 const app = express()
