@@ -79,7 +79,7 @@ exports.deleteVendor = async (req, res) => {
     const { firebase_id } = req.params;
     if (firebase_id) {
       let vendor = await Vendor.deleteVendor(firebase_id);
-      res.status(200).json(vendor);
+      res.status(204).json({message: `${vendor} was deleted`});
     } else {
       res.status(400).json({ message: "No vendor by that id" });
     }
