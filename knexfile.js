@@ -4,7 +4,7 @@ require('dotenv').config()
 localPg = {
   host: 'localhost',
   database: 'market-organizer',
-  user: 'postgres',
+  user: 'market-organizer',
   password: process.env.DATABASE_PASSWORD
 }
 
