@@ -5,7 +5,7 @@ localPg = {
   host: 'localhost',
   database: 'market-organizer',
   user: 'postgres',
-  password: 'lambda-labs'
+  password: process.env.DATABASE_PASSWORD
 }
 
 const productionDbConnection = process.env.DATABASE_URL || localPg;
