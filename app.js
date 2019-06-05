@@ -15,7 +15,6 @@ app.use(helmet());
 
 app.use('/users', usersRoutes);
 app.use('/vendor', vendorRoutes);
-app.use('/users', usersRoutes)
 app.use("/api/products", productsRoutes);
 
 app.get('/', (req, res) => {
