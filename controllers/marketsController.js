@@ -2,9 +2,10 @@ const db = require('../database/dbconfig');
 
 module.exports ={
     find,
-    findByMarketId,
+    findByMarketID,
     deleteByMarketId,
     updateByMarketId
+   
 }
 
 //find all markets
@@ -13,27 +14,26 @@ function find() {
   }
   
 // find market by firebase_id
-function findByMarketId(id) {
-    return db("market").where({ firebase_id: id });
+function findByMarketID(id) {
+    return db("market").where({ firebase_id: String(id) });
   }
  
 // delete market by firebase_id
 function deleteByMarketId (id){
     return db("market")
     .where({
-      firebase_id: id
+      firebase_id: String(id)
     })
     .delete()   
 }
 
 // update market name by firebase_id
-function updateByMarketId (id, marketName){
+function updateByMarketId (id, changes){
     return db('market')
     .where({
-        firebase_id: id
+        firebase_id: String(id)
     })
-    .select("market_name")
-    .update({
-        market_name: marketName
-    });
+    .update(
+      changes, "*"
+    );
 }
