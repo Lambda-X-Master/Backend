@@ -12,30 +12,7 @@ exports.findUsers = async (req, res, next) => {
   }
 };
 
-// exports.registerOrLogin = async (req, res, next) => {
-//   try {
-//     console.log("Test");
-//     const userData = req.body;
-//     console.log("Our cool request body: ", req.body);
-//     const registerToUser = await Users.registerOrLogin(userData);
-//     res.status(201).json(registerToUser);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
-exports.registerOrLogin = async (req, res, next) => {
-  try {
-    // console.log("Test");
-    const { email } = req.body;
-    // console.log("Our cool request body: ", req.body);
-    const firebase_id = req.user
-    const registerToUser = await Users.registerOrLogin({ firebase_id, email });
-    res.status(201).json(registerToUser);
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 exports.registerOrLogin = async (req, res, next) => {
     try {
@@ -62,3 +39,51 @@ exports.registerOrLogin = async (req, res, next) => {
 //       console.log(error);
 //     }
 //   }
+// };
+
+exports.login = async (req, res, next) => {
+    if (req.params.id) {
+      Users.login(req.params.id)
+        .then((user) => {
+          console.log(user, 'login by id')
+            res.status(200).json({ message: `Welcome ${user.email}!` });
+        })
+        .catch(error => {
+          res.status(500).json(error);
+          console.log(error)
+          
+        });
+    } else {
+      res.status(401).json({ message: "Invalid email provided." });
+    }
+};
+
+exports.getUserByFirebaseId = async (req, res) => {
+  try {
+    const { firebase_id } = req.params;
+    if (firebase_id) {
+      const user = await Users.findById(firebase_id);
+      res.status(200).json(user);
+    } else {
+      res.status(400).json({ message: "No user with that firebase Id" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: `User could not be found in the database: ${error}` });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    const user = await Users.updateUser(req.params.firebase_id, req.body);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(400).json({ message: "User is not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: `Error updating user: ${error}` });
+  }
+};
+
