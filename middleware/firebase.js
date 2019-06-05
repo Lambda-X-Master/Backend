@@ -20,4 +20,8 @@ module.exports = (req, res, next) => {
       .status(401)
       .json({ message: "Log in and provide token to view this content." });
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 5140b362a22df1da27e380c31768d8364efa2779

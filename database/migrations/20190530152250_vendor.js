@@ -16,14 +16,15 @@ exports.up = function(knex, Promise) {
         vendor.string('city')
         vendor.string('state')
         vendor.string('zip_code')
-        vendor.string('phone')
+        vendor.string('phone_nunmber')
         vendor.string('company_url')
         vendor
-          .integer('market_id')
+          .string('market_id')
           .unsigned()
-          .notNullable()
-          .references('id')
+          // .notNullable()
+          .references('firebase_id')
           .inTable('market')
+        vendor.string("stripeCustomerId");
     })
   };
   

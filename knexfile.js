@@ -1,17 +1,19 @@
 // Update with your config settings.
 require('dotenv').config()
 
-localpg = {
+localPg = {
   host: 'localhost',
   database: 'market-organizer',
   user: 'postgres',
   password: process.env.DATABASE_PASSWORD
 }
+
+const productionDbConnection = process.env.DATABASE_URL || localPg;
 module.exports = {
 
   development: {
     client: 'pg',
-    connection: localpg, 
+    connection: localPg, 
     migrations: {
       directory: './database/migrations'
     },

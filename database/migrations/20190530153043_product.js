@@ -7,10 +7,10 @@ exports.up = function(knex, Promise) {
         product.float('price')
         product.string('image', 250)
         product
-          .integer('vendors_id')
+          .string('vendors_id')
           .unsigned()
           .notNullable()
-          .references('id') 
+          .references('firebase_id') 
           .inTable('vendor')
     })
   };
