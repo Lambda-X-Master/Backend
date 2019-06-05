@@ -2,7 +2,7 @@ const Stalls = require("../models/stall");
 
 exports.getStalls =  async (req, res, next) => {
     try{
-        const allStalls = Stalls.getStalls();
+        const allStalls = await Stalls.getStalls();
         res.status(200).json(allStalls);
     }
     catch(err) {

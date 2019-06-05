@@ -1,7 +1,7 @@
 const db = require("../database/dbconfig");
 
 async function getStalls() {
-    return db("stall");
+    return db("stall").select("id","size", "market_id", "available","qty");
 }
 
 async function getStallsByMarketId(marketId) {
