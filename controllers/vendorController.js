@@ -13,9 +13,9 @@ exports.getVendors = async (req, res, next) => {
 
 exports.getVendorById = async (req, res) => {
   try {
-    const { firebase_id } = req.params;
-    if (firebase_id) {
-      const vendor = await Vendor.getVendorById(firebase_id);
+    const { id } = req.params;
+    if (id) {
+      const vendor = await Vendor.getVendorById(id);
       res.status(200).json(vendor);
     } else {
       res.status(400).json({ message: "No Vendor with that firebase Id" });
@@ -63,7 +63,7 @@ exports.addVendor = async (req, res) => {
 
 exports.updateVendor = async (req, res) => {
   try {
-    const vendor = await Vendor.updateVendor(req.params.id, req.body);
+    const vendor = await Vendor.updateVendor(req.params.firebase_id, req.body);
     if (vendor) {
       res.status(200).json(vendor);
     } else {

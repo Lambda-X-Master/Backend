@@ -49,14 +49,14 @@ async function addVendor(vendor) {
 //     return findVendorBy({ id });
 //   }
 
-function updateVendor(id, changes) {
+function updateVendor(firebase_id, changes) {
   return db("vendor")
-    .where({ id: id })
-    .update(changes);
+    .where({ firebase_id })
+    .update(changes, "*");
 }
 
 function deleteVendor(id) {
   return db("vendor")
-    .where({ id })
+    .where({ 'firebase_id': id })
     .del();
 }
