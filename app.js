@@ -10,7 +10,7 @@ app.use(cors());
 app.use(helmet());
 
 app.use('/users', usersRoutes);
-app.use('/api/vendor', vendorRoutes);
+app.use('/vendor', vendorRoutes);
 
 app.get('/', (req, res) => {
     res.send(`sanity check`)

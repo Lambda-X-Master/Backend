@@ -12,7 +12,7 @@ vendorRouter.get('/id/:id', vendorController.getVendorById);
 // vendorRouter.post('/:firebase_id', vendorController.getVendorById);
 vendorRouter.post('/', vendorController.addVendor);
 vendorRouter.put('/:firebase_id', vendorController.updateVendor);
-vendorRouter.delete('/:id', vendorController.deleteVendor);
+vendorRouter.delete('/:firebase_id', vendorController.deleteVendor);
 
 
 module.exports = vendorRouter;
