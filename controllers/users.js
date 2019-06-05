@@ -70,3 +70,33 @@ exports.login = async (req, res, next) => {
       res.status(401).json({ message: "Invalid email provided." });
     }
 };
+
+exports.getUserByFirebaseId = async (req, res) => {
+  try {
+    const { firebase_id } = req.params;
+    if (firebase_id) {
+      const user = await Users.findById(firebase_id);
+      res.status(200).json(user);
+    } else {
+      res.status(400).json({ message: "No user with that firebase Id" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: `User could not be found in the database: ${error}` });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    const user = await Users.updateUser(req.params.firebase_id, req.body);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(400).json({ message: "User is not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: `Error updating user: ${error}` });
+  }
+};
+
