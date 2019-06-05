@@ -79,7 +79,7 @@ exports.deleteProductByProductId = async (req, res, next) => {
         }
     }
     catch(err) {
-        res.status(500).json(`Cannot update product: ${err}`);
+        res.status(500).json(`Cannot delete product: ${err}`);
         console.log(err);
     }
 }
