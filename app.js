@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const usersRoutes = require('./routes/users');
 const vendorRoutes = require('./routes/vendorRoutes.js');
 const productsRoutes = require("./routes/product");
+const stallsRoutes = require("./routes/stall");
 
 const app = express()
 
@@ -15,7 +16,8 @@ app.use(helmet());
 
 app.use('/users', usersRoutes);
 app.use('/vendor', vendorRoutes);
-app.use("/api/products", productsRoutes);
+app.use("/products", productsRoutes);
+app.use("/stalls", stallsRoutes);
 
 app.get('/', (req, res) => {
     res.send(`sanity check`)
