@@ -14,7 +14,7 @@ exports.getProductsByVendorId = async (req, res, next) => {
         }
     }
     catch(err) {
-        res.status(500).json(`No products found`);
+        res.status(500).json(`No products found: ${err}`);
         console.log(err);
     }
 }
@@ -34,7 +34,7 @@ exports.addProductByVendorId = async (req, res, next) => {
         }
     }
     catch(err) {
-        res.status(500).json(`Cannot add product`);
+        res.status(500).json(`Cannot add product: ${err}`);
         console.log(err);
     }
 }
@@ -57,7 +57,7 @@ exports.updateProductByProductId =  async (req, res, next) => {
         }
     }
     catch(err) {
-        res.status(500).json(`Cannot update product`);
+        res.status(500).json(`Cannot update product: ${err}`);
         console.log(err);
     }
 }
@@ -79,7 +79,7 @@ exports.deleteProductByProductId = async (req, res, next) => {
         }
     }
     catch(err) {
-        res.status(500).json(`Cannot update product`);
+        res.status(500).json(`Cannot update product: ${err}`);
         console.log(err);
     }
 }
