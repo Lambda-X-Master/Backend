@@ -3,10 +3,12 @@ const express = require('express');
 const usersController = require('../controllers/users');
 
 const router = express.Router();
-const firebaseMiddleware = require("../middleware/firebase.js");
+const isAuthenticated = require("../middleware/firebase.js");
 
-router.get('/', usersController.findUsers)
-router.post("/register", usersController.registerOrLogin); 
-router.get("/login", usersController.registerOrLogin);
+
+
+router.post("/register", isAuthenticated, usersController.registerOrLogin); 
+router.get("/login", isAuthenticated, usersController.registerOrLogin);
+router.get('/',  isAuthenticated, usersController.findUsers)
 
 module.exports = router
