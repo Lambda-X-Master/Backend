@@ -37,16 +37,17 @@ async function register(user) {
 
 function findById(firebase_id) {
   return db("users")
-    .where({ firebase_id: firebase_id })
+    .where({ 'firebase_id': firebase_id })
     .first();
 };
 
 function login(email) {
   return db("users").where({email: email}).first();
 }
-
-function updateUser(id, changes) {
-  return db('users').where({firebase_id: id}).update(changes)
+function updateUser(firebase_id, changes) {
+  return db("users")
+    .where({ firebase_id })
+    .update(changes, "*");
 }
 
 async function findByUserType(user) {
@@ -62,6 +63,8 @@ async function findByUserType(user) {
   }
 }
 
+
+
 module.exports = {
   find,
   registerOrLogin,
@@ -69,5 +72,6 @@ module.exports = {
   findById,
   login,
   updateUser,
-  findByUserType
+  findByUserType,
+ 
 };
