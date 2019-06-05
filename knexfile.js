@@ -4,8 +4,8 @@ require('dotenv').config()
 localPg = {
   host: 'localhost',
   database: 'market-organizer',
-  user: 'market-organizer',
-  password: process.env.DATABASE_PASSWORD
+  user: 'postgres',
+  password: 'lambda-labs'
 }
 
 const productionDbConnection = process.env.DATABASE_URL || localPg;
