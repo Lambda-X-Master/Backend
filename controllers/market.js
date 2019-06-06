@@ -1,4 +1,5 @@
-const market = require("../models/market");
+const Market = require("../models/market");
+const db = require("../database/dbconfig");
 
 exports.getAllMarkets = async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ exports.addMarket = async (req, res) => {
   try {
     const newMarket = req.body;
     if (newMarket) {
-      const market = await market.addMarket(newMarket);
+      const market = await Market.addMarket(newMarket);
       console.log(market, "market added");
       res.status(200).json(market);
     } else {

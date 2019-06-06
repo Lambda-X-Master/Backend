@@ -41,6 +41,7 @@ async function addMarket(market) {
 
 module.exports = {
   findAllMarkets,
+  getMarketById,
   addMarketByFirebaseId,
-  addMarket
+  addMarket,  
 };
