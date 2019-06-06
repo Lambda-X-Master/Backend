@@ -4,17 +4,17 @@ const db = require('../controllers/marketsController');
 const isAuthenticated = require("../middleware/firebase.js");
 
 //Get all markets
-router.get("/", isAuthenticated, (req, res) => {
-  db.find(req.body)
-    .then(markets => {
-      res.status(200).json(markets);
-    })
-    .catch(error => {
-      res
-        .status(500)
-        .json({ error: "Could not get Markets" });
-    });
-});
+// router.get("/", isAuthenticated, (req, res) => {
+//   db.find(req.body)
+//     .then(markets => {
+//       res.status(200).json(markets);
+//     })
+//     .catch(error => {
+//       res
+//         .status(500)
+//         .json({ error: "Could not get Markets" });
+//     });
+// });
 
 //Markets by Id
 router.get("/:id", isAuthenticated, (req, res) => {
