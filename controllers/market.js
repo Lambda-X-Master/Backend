@@ -10,22 +10,22 @@ exports.getAllMarkets = async (req, res, next) => {
   }
 };
 
-exports.addMarket = async (req, res) => {
-  try {
-    const newMarket = req.body;
-    if (newMarket) {
-      const market = await Market.addMarket(newMarket);
-      console.log(market, "market added");
-      res.status(200).json(market);
-    } else {
-      res.status(400).json({ message: "Must enter all input fields" });
-    }
-  } catch (error) {
-    res.status(500).json({
-      error: `There was an error adding market to the database: ${error}`
-    });
-  }
-};
+// exports.addMarket = async (req, res) => {
+//   try {
+//     const newMarket = req.body;
+//     if (newMarket) {
+//       const market = await Market.addMarket(newMarket);
+//       console.log(market, "market added");
+//       res.status(200).json(market);
+//     } else {
+//       res.status(400).json({ message: "Must enter all input fields" });
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       error: `There was an error adding market to the database: ${error}`
+//     });
+//   }
+// };
 
 exports.addMarketByFirebaseId = async (req, res) => {
   try {

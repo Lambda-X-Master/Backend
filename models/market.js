@@ -48,16 +48,16 @@ async function addMarketByFirebaseId(market, firebaseId) {
   }
 }
 
-async function addMarket(market) {
-  const [id] = await db("market")
-    .insert(market)
-    .returning("id");
-  return getMarketById(id);
-}
+// async function addMarket(market) {
+//   const [id] = await db("market")
+//     .insert(market)
+//     .returning("id");
+//   return getMarketById(id);
+// }
 
 module.exports = {
   findAllMarkets,
   getMarketById,
   addMarketByFirebaseId,
-  addMarket
+//   addMarket
 };
