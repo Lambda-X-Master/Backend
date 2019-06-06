@@ -29,24 +29,11 @@ function findByMarketID(firebase_id) {
 }
  
 // delete market by firebase_id
-function deleteByMarketId (id){
-    return db("market")
-    .where({
-      firebase_id: String(id)
-    })
-    .delete()   
+function deleteByMarketId(id){
+  return db("market")
+  .where({ 'firebase_id': id })
+  .del();  
 }
-
-// update market name by firebase_id
-// function updateByMarketId (id, changes){
-//     return db('market')
-//     .where({
-//         firebase_id: String(id)
-//     })
-//     .update(
-//       changes, "*"
-//     );
-// }
 
 function updateByMarketId(firebaseId, changes) {
   return db("market")

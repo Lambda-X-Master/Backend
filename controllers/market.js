@@ -18,7 +18,7 @@ exports.addMarket = async (req, res, next) => {
         console.log(id, 'id from add market')
         const marketData = req.body
         const newMarket = await market.addMarket(marketData)
-        res.status(204).json(newMarket)
+        res.status(201).json(newMarket)
     } catch (err) {
         res.status(500).json(`error adding market`)
         console.log(err, 'error from add market')
@@ -49,9 +49,10 @@ exports.getMarketById = async (req, res, next) => {
 
 exports.deleteMarket = async (req, res, next) => {
     try {
-        const id = req.params.firebase_id;
-        const marketinfo = market.deleteByMarketId(id)
-        res.status(200).json({ message: "Market Was Successfully Deleted" });
+        const firebaseId = req.params.id;
+        console.log(firebaseId)
+        const marketData = await market.deleteByMarketId(firebaseId)
+        res.status(200).json(`item deleted successfully`);
     }
       catch(error) {
         res.status(500).json({error: 'Could Not Delete This Market'});
