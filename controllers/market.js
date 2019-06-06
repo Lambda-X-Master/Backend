@@ -3,7 +3,7 @@ const db = require("../database/dbconfig");
 
 exports.getAllMarkets = async (req, res, next) => {
   try {
-    const markets = await market.findAllMarkets();
+    const markets = await Market.findAllMarkets();
     res.status(200).json(markets);
   } catch (err) {
     res.status(500).json(`There was an error getting all markets`);
@@ -35,9 +35,9 @@ exports.addMarketByFirebaseId = async (req, res) => {
     } else {
       let market = req.body;
       console.log("Market", market);
-      const newMarket = await market.addMarketByFirebaseId(
+      const newMarket = await Market.addMarketByFirebaseId(
         market,
-        fireabase_id
+        firebase_id
       );
       console.log("Added market", newMarket);
       res.status(200).json(newMarket);
