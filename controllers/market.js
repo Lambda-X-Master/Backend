@@ -50,3 +50,14 @@ exports.deleteMarket = async (req, res, next) => {
         res.status(500).json({error: 'Could Not Delete This Market'});
       });
 }
+
+exports.editMarket = async (req, res, next) => {
+    const id = req.params.firebase_id;
+    db.updateByMarketId(id)
+    .then(() => {
+        res.status(200).json({message: 'Market Info Was Updated'})
+    })
+    .catch(error => {
+        res.status(500).json({error: `Could Not Update This Market's Information`});
+      });
+}
