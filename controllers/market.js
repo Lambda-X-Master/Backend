@@ -27,37 +27,40 @@ exports.addMarket = async (req, res, next) => {
 
 //Market by ID
 exports.getMarketById = async (req, res, next) => {
-    const id = req.params.firebase_id;
+    
+    try {
+        const id = req.params.firebase_id;
     console.log(id);
-    db.findByMarketID(id)
-      .then(marketinfo => {
+        const marketinfo = await market.findByMarketID(id)
         res.status(200).json(marketinfo);
-      })
-      .catch(error => {
+    }
+    
+      catch(error) {
         res
           .status(500)
           .json({ error: "Could not get Markets associated with that ID" });
-      });
+      };
 }
 
 exports.deleteMarket = async (req, res, next) => {
-    const id = req.params.firebase_id;
-    db.deleteByMarketId(id)
-    .then(() => {
+    try {
+        const id = req.params.firebase_id;
+        const marketinfo = market.deleteByMarketId(id)
         res.status(200).json({ message: "Market Was Successfully Deleted" });
-      })
-      .catch(error => {
+    }
+      catch(error) {
         res.status(500).json({error: 'Could Not Delete This Market'});
-      });
+      };
 }
 
 exports.editMarket = async (req, res, next) => {
-    const id = req.params.firebase_id;
-    db.updateByMarketId(id)
-    .then(() => {
+    try {
+        const id = req.params.firebase_id;
+        const marketinfo = market.editMarket(id)
         res.status(200).json({message: 'Market Info Was Updated'})
-    })
-    .catch(error => {
+
+    }
+    catch(error) {
         res.status(500).json({error: `Could Not Update This Market's Information`});
-      });
+      };
 }
