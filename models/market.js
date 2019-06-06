@@ -3,6 +3,7 @@ const db = require('../database/dbconfig');
 findAllMarkets = () => {
     return db('market')
         .select(
+            "id",
             "firebase_id", 
             "market_name", 
             "contact_first_name", 
@@ -17,9 +18,15 @@ findAllMarkets = () => {
 
   
 // find market by firebase_id
-function findByMarketID(id) {
-    return db("market").where({ firebase_id: String(id) });
-  }
+// function findByMarketID(firebase_id) {
+//     return db("market").where("firebase_id", firebase_id );
+//   }
+
+function findByMarketID(firebase_id) {
+  return db("market")
+    .where({ 'firebase_id': firebase_id })
+    .first();
+}
  
 // delete market by firebase_id
 function deleteByMarketId (id){
@@ -31,14 +38,20 @@ function deleteByMarketId (id){
 }
 
 // update market name by firebase_id
-function updateByMarketId (id, changes){
-    return db('market')
-    .where({
-        firebase_id: String(id)
-    })
-    .update(
-      changes, "*"
-    );
+// function updateByMarketId (id, changes){
+//     return db('market')
+//     .where({
+//         firebase_id: String(id)
+//     })
+//     .update(
+//       changes, "*"
+//     );
+// }
+
+function updateByMarketId(firebaseId, changes) {
+  return db("market")
+    .where({ firebase_id: firebaseId })
+    .update(changes);
 }
 
 async function addMarket(market) {
