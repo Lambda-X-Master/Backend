@@ -19,6 +19,12 @@ function getMarketById(id) {
     .first();
 }
 
+function getMarketByfirebaseId(firebaseId) {
+  return db("market")
+    .where({ 'firebase_id': firebaseId })
+    .first();
+}
+
 // async function addMarketByFirebaseId(market, firebaseId) {
 //   try {
 //     let addedMarket = {
@@ -48,16 +54,17 @@ async function addMarketByFirebaseId(market, firebaseId) {
   }
 }
 
-// async function addMarket(market) {
-//   const [id] = await db("market")
-//     .insert(market)
-//     .returning("id");
-//   return getMarketById(id);
-// }
+async function addMarket(market) {
+  const [id] = await db("market")
+    .insert(market)
+    .returning("id");
+  return getMarketById(id);
+}
 
 module.exports = {
   findAllMarkets,
   getMarketById,
   addMarketByFirebaseId,
-//   addMarket
+  addMarket,
+  getMarketByfirebaseId
 };
