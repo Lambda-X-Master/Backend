@@ -27,9 +27,8 @@ exports.addMarket = async (req, res, next) => {
 
 //Market by ID
 exports.getMarketById = async (req, res, next) => {
-    
     try {
-        const firebase_id = req.params;
+        const firebase_id = req.params.id;
         console.log(firebase_id, 'get by id' );
         if (firebase_id) {
             const marketinfo = await market.findByMarketID(firebase_id)
@@ -72,13 +71,4 @@ exports.editMarket = async (req, res, next) => {
           console.log(error)
         res.status(500).json({ message: `Error updating market: ${error}` });
       }
-    // try {
-    //     const id = req.params.firebase_id;
-    //     const marketinfo = market.editMarket(id)
-    //     res.status(200).json({message: 'Market Info Was Updated'})
-
-    // }
-    // catch(error) {
-    //     res.status(500).json({error: `Could Not Update This Market's Information`});
-    //   };
 }
