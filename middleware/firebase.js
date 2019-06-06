@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         return next();
       })
       .catch(err => {
-        console.error("Error while verifying Firebase Id token:", err);
+        // console.error("Error while verifying Firebase Id token:", err);
         res.status(403).send("Unauthorized");
       });
   } else {
