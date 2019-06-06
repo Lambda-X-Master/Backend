@@ -51,7 +51,6 @@ exports.login = async (req, res, next) => {
         .catch(error => {
           res.status(500).json(error);
           console.log(error)
-          
         });
     } else {
       res.status(401).json({ message: "Invalid email provided." });
