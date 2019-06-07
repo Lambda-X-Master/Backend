@@ -105,3 +105,24 @@ exports.getVendorByMarketFirebaseId = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.addVendorByFirebaseId = async (req, res) => {
+  try {
+    const firebase_id = req.params.firebaseId;
+    if (!firebase_id) {
+      res.status(404).json({ message: `You are missing firebase Id` });
+    } else {
+      let vendor = req.body;
+      console.log("Vendor", vendor);
+      const newVendor = await Vendor.addVendorByFirebaseId(
+        vendor,
+        firebase_id
+      );
+      console.log("Added vendor", newVendor);
+      res.status(200).json(newVendor);
+    }
+  } catch (err) {
+    res.status(500).json(`Can not add vendor: ${err}`);
+    console.log(err);
+  }
+};
