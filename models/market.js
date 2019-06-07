@@ -18,9 +18,7 @@ findAllMarkets = () => {
 
   
 // find market by firebase_id
-// function findByMarketID(firebase_id) {
-//     return db("market").where("firebase_id", firebase_id );
-//   }
+
 
 function findByMarketID(firebase_id) {
   return db("market")
@@ -41,34 +39,21 @@ function getMarketByfirebaseId(firebaseId) {
     .first();
 }
 
-// async function addMarketByFirebaseId(market, firebaseId) {
-//   try {
-//     let addedMarket = {
-//       ...market,
-//       firebase_id: firebaseId
-//     };
-//     console.log("posted market", addedMarket);
-//     return db("market").insert(addedMarket).select('*').returning('id');
-
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 async function addMarketByFirebaseId(market, firebaseId) {
   try {
     let addedMarket = {
       ...market,
       firebase_id: firebaseId
     };
-    const [id] = await db("market")
-      .insert(addedMarket)
-      .returning("id");
-    return getMarketById(id);
+    console.log("posted market", addedMarket);
+    return db("market").insert(addedMarket).select('*').returning('id');
+
   } catch (err) {
     console.log(err);
   }
 }
+
+
 
 async function addMarket(market) {
   const [id] = await db("market")
@@ -79,7 +64,6 @@ async function addMarket(market) {
 
 module.exports = {
   findAllMarkets,
-  getMarketById,
   addMarketByFirebaseId,
   addMarket,
   getMarketByfirebaseId,

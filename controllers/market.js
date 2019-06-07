@@ -1,9 +1,9 @@
-const market = require('../models/market');
+const Market = require('../models/market');
 const user = require('../models/users');
 
 exports.getAllMarkets = async (req, res, next) => {
     try {
-        const markets = await market.findAllMarkets()
+        const markets = await Market.findAllMarkets()
         res.status(200).json(markets)
     } catch (err) {
         res.status(500).json(`There was an error getting all markets`)
@@ -34,7 +34,7 @@ exports.getMarketById = async (req, res, next) => {
         const firebase_id = req.params.id;
         console.log(firebase_id, 'get by id' );
         if (firebase_id) {
-            const marketinfo = await market.findByMarketID(firebase_id)
+            const marketinfo = await Market.findByMarketID(firebase_id)
             console.log(marketinfo)
             res.status(200).json(marketinfo);
         } else {
@@ -54,7 +54,7 @@ exports.deleteMarket = async (req, res, next) => {
     try {
         const firebaseId = req.params.id;
         console.log(firebaseId)
-        const marketData = await market.deleteByMarketId(firebaseId)
+        const marketData = await Market.deleteByMarketId(firebaseId)
         res.status(200).json(`item deleted successfully`);
     }
       catch(error) {
@@ -67,7 +67,7 @@ exports.editMarket = async (req, res, next) => {
         const firebaseId = req.params.id
         console.log(req.params)
         const marketData = req.body
-        const updatedMarket = await market.updateByMarketId(firebaseId, marketData);
+        const updatedMarket = await Market.updateByMarketId(firebaseId, marketData);
         console.log(req.body, 'req.body')
           res.status(200).json(updatedMarket)
         

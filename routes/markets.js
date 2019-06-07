@@ -57,16 +57,16 @@ router.put('/:id', (req,res) =>{
 })
 
 
-//Add a Market
-router.post('/:id', (req, res) =>{
-  db.insert(req.body)
-  .then(() => {
-    res.status(200).json({message: 'Market Was Added'})
-})
-.catch(error => {
-    res.status(500).json({error: `Could Not Add Market`});
-  });
+// //Add a Market
+// router.post('/:id', (req, res) =>{
+//   db.insert(req.body)
+//   .then(() => {
+//     res.status(200).json({message: 'Market Was Added'})
+// })
+// .catch(error => {
+//     res.status(500).json({error: `Could Not Add Market`});
+//   });
 
-})
+// })
 
 module.exports = router;
