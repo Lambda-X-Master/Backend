@@ -35,21 +35,54 @@ function deleteByMarketId(id){
   .del();  
 }
 
-function updateByMarketId(firebaseId, changes) {
+function getMarketByfirebaseId(firebaseId) {
   return db("market")
-    .where({ firebase_id: firebaseId })
-    .update(changes);
+    .where({ 'firebase_id': firebaseId })
+    .first();
+}
+
+// async function addMarketByFirebaseId(market, firebaseId) {
+//   try {
+//     let addedMarket = {
+//       ...market,
+//       firebase_id: firebaseId
+//     };
+//     console.log("posted market", addedMarket);
+//     return db("market").insert(addedMarket).select('*').returning('id');
+
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+async function addMarketByFirebaseId(market, firebaseId) {
+  try {
+    let addedMarket = {
+      ...market,
+      firebase_id: firebaseId
+    };
+    const [id] = await db("market")
+      .insert(addedMarket)
+      .returning("id");
+    return getMarketById(id);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function addMarket(market) {
-   const [id] = await db('market').insert(market, 'id')
-  return findByMarketID({ id })
+  const [id] = await db("market")
+    .insert(market)
+    .returning("id");
+  return getMarketById(id);
 }
 
 module.exports = {
-    findAllMarkets,
-    findByMarketID,
-    deleteByMarketId,
-    updateByMarketId,
-    addMarket
-}
+  findAllMarkets,
+  getMarketById,
+  addMarketByFirebaseId,
+  addMarket,
+  getMarketByfirebaseId,
+  findByMarketID,
+  deleteByMarketId
+};
