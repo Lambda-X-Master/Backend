@@ -7,7 +7,7 @@ const vendorRoutes = require('./routes/vendorRoutes.js');
 const productsRoutes = require("./routes/product");
 const marketRoutes = require("./routes/market");
 const stallsRoutes = require("./routes/stall");
-
+const stripe = require('./routes/stripe');
 const app = express()
 
 app.use(express.json());
@@ -18,6 +18,7 @@ app.use(helmet());
 
 app.use('/users', usersRoutes);
 
+app.use('/stripe', stripe)
 app.use('/markets', marketRoutes);
 app.use('/vendor', vendorRoutes);
 app.use("/products", productsRoutes);
