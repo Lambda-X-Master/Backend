@@ -34,6 +34,13 @@ async function register(user) {
 
   return findById(id);
 }
+// async function findById(id) {
+//   const user = await db("users")
+//     .where({ id })
+//     .first();
+//   // console.log(user);
+//   return user;
+// }
 
 function findById(firebase_id) {
   return db("users")

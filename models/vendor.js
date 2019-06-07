@@ -7,7 +7,8 @@ module.exports = {
   updateVendor,
   deleteVendor,
   findVendorBy,
-  getVendorByfirebaseId
+  getVendorByfirebaseId,
+  getVendorByMarketFirebaseId
 };
 
 function getVendors() {
@@ -59,4 +60,10 @@ function deleteVendor(id) {
   return db("vendor")
     .where({ 'firebase_id': id })
     .del();
+}
+
+function getVendorByMarketFirebaseId(firebaseId) {
+  return db("vendor")
+    .where({ 'market_id': firebaseId })
+    
 }

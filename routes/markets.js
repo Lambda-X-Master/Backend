@@ -4,32 +4,32 @@ const db = require('../controllers/marketsController');
 const isAuthenticated = require("../middleware/firebase.js");
 
 //Get all markets
-router.get("/", isAuthenticated, (req, res) => {
-  db.find(req.body)
-    .then(markets => {
-      res.status(200).json(markets);
-    })
-    .catch(error => {
-      res
-        .status(500)
-        .json({ error: "Could not get Markets" });
-    });
-});
+// router.get("/", isAuthenticated, (req, res) => {
+//   db.find(req.body)
+//     .then(markets => {
+//       res.status(200).json(markets);
+//     })
+//     .catch(error => {
+//       res
+//         .status(500)
+//         .json({ error: "Could not get Markets" });
+//     });
+// });
 
 //Markets by Id
-router.get("/:id", isAuthenticated, (req, res) => {
-  const id = req.params.firebase_id;
-  console.log(id);
-  db.findByMarketID(id)
-    .then(marketinfo => {
-      res.status(200).json(marketinfo);
-    })
-    .catch(error => {
-      res
-        .status(500)
-        .json({ error: "Could not get Markets associated with that ID" });
-    });
-});
+// router.get("/:id", isAuthenticated, (req, res) => {
+//   const id = req.params.firebase_id;
+//   console.log(id);
+//   db.findByMarketID(id)
+//     .then(marketinfo => {
+//       res.status(200).json(marketinfo);
+//     })
+//     .catch(error => {
+//       res
+//         .status(500)
+//         .json({ error: "Could not get Markets associated with that ID" });
+//     });
+// });
 
 //Delete Markets
 router.delete('/:id', (req, res) => {

@@ -8,6 +8,7 @@ const isAuthenticated = require('../middleware/firebase.js');
 
 vendorRouter.get('/', vendorController.getVendors);
 vendorRouter.get('/:firebase_id', vendorController.getVendorByFirebaseId);
+vendorRouter.get('/market/:firebaseId/vendor', vendorController.getVendorByMarketFirebaseId);
 vendorRouter.get('/id/:id', vendorController.getVendorById);
 // vendorRouter.post('/:firebase_id', vendorController.getVendorById);
 vendorRouter.post('/', vendorController.addVendor);
