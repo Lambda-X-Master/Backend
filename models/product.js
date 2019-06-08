@@ -2,26 +2,47 @@ const db = require("../database/dbconfig");
 
 async function getProductsByVendorId(vendorId) {
     try{
-        return db("product").where({vendor_id: vendorId})
+        return db("product").where({vendors_id: vendorId})
     }
     catch(err){
         console.log(err);
     }
 }
 
+function getProductById(id) {
+    return db("product")
+      .where({ id })
+      .first();
+  }
+
+// async function addProductByVendorId(product, vendorId) {
+//     try{
+//         let addedProduct = {
+//             ...product,
+//             vendors_id: vendorId
+//         };
+//         console.log("Our added product :",addedProduct);
+//         return db("product").insert(addedProduct);
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
+
 async function addProductByVendorId(product, vendorId) {
-    try{
+    try {
         let addedProduct = {
             ...product,
             vendors_id: vendorId
         };
-        console.log("Our added product :",addedProduct);
-        return db("product").insert(addedProduct);
+      const [id] = await db("product")
+        .insert(addedProduct)
+        .returning("id");
+      return getProductById(id);
+    } catch (err) {
+      console.log(err);
     }
-    catch(err){
-        console.log(err);
-    }
-}
+  }
 
 async function updateProductByProductId(product, productId) {
     try{

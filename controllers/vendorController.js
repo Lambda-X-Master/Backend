@@ -5,7 +5,7 @@ const db = require("../database/dbconfig");
 exports.getVendors = async (req, res, next) => {
   try {
     const allVendors = await Vendor.getVendors();
-    console.log(allVendors);
+    // console.log(allVendors);
     res.status(200).json(allVendors);
   } catch (error) {
     res.status(500).json(`No vendors found: ${error}`);
