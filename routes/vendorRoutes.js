@@ -12,8 +12,8 @@ vendorRouter.get('/market/:firebaseId/vendor', vendorController.getVendorByMarke
 vendorRouter.get('/id/:id', vendorController.getVendorById);
 // vendorRouter.post('/:firebaseId', vendorController.addVendorByFirebaseId);
 vendorRouter.post('/', isAuthenticated, vendorController.addVendor);
-vendorRouter.put('/:firebase_id', vendorController.updateVendor);
-vendorRouter.delete('/:firebase_id', vendorController.deleteVendor);
+vendorRouter.put('/:firebase_id', isAuthenticated, vendorController.updateVendor);
+vendorRouter.delete('/:firebase_id', isAuthenticated, vendorController.deleteVendor);
 
 
 module.exports = vendorRouter;
