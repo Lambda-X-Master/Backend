@@ -1,4 +1,4 @@
-const db = require('../database/dbconfig');
+const db = require("../database/dbconfig");
 
 findAllMarkets = () => {
     return db('market')

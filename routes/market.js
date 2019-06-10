@@ -11,4 +11,7 @@ router.post('/add-market', marketController.addMarket);
 router.put('/:id', marketController.editMarket);
 router.delete('/:id', marketController.deleteMarket);
 
+router.post('/:firebaseId', marketController.addMarketByFirebaseId);
+router.post('/', marketController.addMarket);
+
 module.exports = router
