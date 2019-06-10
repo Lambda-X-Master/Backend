@@ -17,7 +17,8 @@ exports.addMarket = async (req, res, next) => {
         const id = req.params.id;
         console.log(id, 'id from add market')
         const marketData = req.body
-        const newMarket = await market.addMarket(marketData)
+        const newMarket = await market.addMarket(marketData, id)
+        console.log(newMarket)
         res.status(201).json(newMarket)
     } catch (err) {
         res.status(500).json(`error adding market`)
@@ -31,7 +32,7 @@ exports.getMarketById = async (req, res, next) => {
         const firebase_id = req.params.id;
         console.log(firebase_id, 'get by id' );
         if (firebase_id) {
-            const marketinfo = await market.findByMarketID(firebase_id)
+            const marketinfo = await market.findByMarketFirebaseID(firebase_id)
             console.log(marketinfo)
             res.status(200).json(marketinfo);
         } else {
