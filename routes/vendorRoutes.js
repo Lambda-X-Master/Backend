@@ -18,5 +18,10 @@ vendorRouter.post('/', vendorController.addVendor);
 vendorRouter.put('/:firebase_id', vendorController.updateVendor);
 vendorRouter.delete('/:firebase_id', vendorController.deleteVendor);
 
+//test
+
+vendorRouter.post('/:id/add-cart', cartController.addCart);
+vendorRouter.get('/cart', cartController.getCart)
+
 
 module.exports = vendorRouter;
