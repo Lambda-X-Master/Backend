@@ -13,10 +13,15 @@ vendorRouter.get('/market/:firebaseId/vendor', vendorController.getVendorByMarke
 vendorRouter.get('/id/:id', vendorController.getVendorById);
 //Get Vendor Cart
 vendorRouter.get('/:id/cart', cartController.getVendorCart);
-// vendorRouter.post('/:firebase_id', vendorController.getVendorById);
-vendorRouter.post('/', vendorController.addVendor);
-vendorRouter.put('/:firebase_id', vendorController.updateVendor);
-vendorRouter.delete('/:firebase_id', vendorController.deleteVendor);
+vendorRouter.post('/:firebaseId', isAuthenticated, vendorController.addVendorByFirebaseId);
+vendorRouter.post('/', isAuthenticated, vendorController.addVendor);
+vendorRouter.put('/:firebase_id', isAuthenticated, vendorController.updateVendor);
+vendorRouter.delete('/:firebase_id', isAuthenticated, vendorController.deleteVendor);
+
+//test
+
+vendorRouter.post('/:id/add-cart', cartController.addCart);
+vendorRouter.get('/cart', cartController.getCart)
 
 
 module.exports = vendorRouter;

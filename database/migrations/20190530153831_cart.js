@@ -3,10 +3,10 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTable('cart', cart => {
         cart.increments()
         cart
-        .integer('firebase_id')
+        .string('firebase_id')
         .unsigned()
         .notNullable()
-        .references('id')
+        .references('firebase_id')
         .inTable('vendor')
         cart.float('total')
         cart.integer('quantity')
