@@ -23,7 +23,7 @@ function getVendorById(id) {
 }
 function getVendorByfirebaseId(firebase_id) {
     return db("vendor")
-      .where({ 'firebase_id': firebase_id })
+      .where({'firebase_id': firebase_id })
       .first();
   }
 

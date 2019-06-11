@@ -38,9 +38,9 @@ exports.getVendorByFirebaseId = async (req, res) => {
     console.log(firebase_id, 'vendor id')
     if (firebase_id) {
       const vendor = await Vendor.getVendorByfirebaseId(firebase_id);
-      const vendorCart = await Cart.getVendorCart(firebase_id)
+      const vendorCart = await Cart.getCartById(firebase_id)
       console.log(vendorCart, 'vendor by id')
-      res.status(200).json({...vendor, vendorCart});
+      res.status(200).json({vendor, vendorCart});
       // res.status(200).json(vendor);
     } else {
       res.status(400).json({ message: "No Vendor with that firebase Id" });
@@ -79,11 +79,14 @@ exports.getVendorByFirebaseId = async (req, res) => {
 
 exports.addVendor = async (req, res) => {
   try {
+    const id = req.params.id
     const newVendor = req.body;
     // console.log(newVendor);
     if (newVendor) {
       const vendor = await Vendor.addVendor(newVendor);
-      
+      const cart = await Cart.addCart(id)
+      console.log(id, 'vendor id')
+      console.log(cart)
       res.status(200).json(vendor);
     } else {
       res.status(400).json({ message: "Must enter all input fields" });
@@ -141,21 +144,59 @@ exports.getVendorByMarketFirebaseId = async (req, res) => {
   }
 };
 
+// exports.addVendorByFirebaseId = async (req, res) => {
+//   try {
+//     const firebase_id = req.params.firebaseId;
+//     if (!firebase_id) {
+//       res.status(404).json({ message: `You are missing firebase Id` });
+//     } else {
+//       let vendor = req.body;
+      
+//       // console.log(firebase_id, 'vendor id')
+     
+//       console.log("Vendor", vendor);
+//       const newVendor = await Vendor.addVendorByFirebaseId(
+//         vendor,
+//         firebase_id
+//       );
+//       const cart = await Cart.addCart(firebase_id)
+//       console.log("Added vendor", newVendor, cart);
+//       console.log(cart, 'vendor cart')
+//       res.status(200).json({newVendor, cart});
+//     }
+//   } catch (err) {
+//     res.status(500).json(`Can not add vendor: ${err}`);
+//     console.log(err);
+//   }
+// };
+
 exports.addVendorByFirebaseId = async (req, res) => {
   try {
     const firebase_id = req.params.firebaseId;
-    if (!firebase_id) {
-      res.status(404).json({ message: `You are missing firebase Id` });
-    } else {
-      let vendor = req.body;
-      console.log("Vendor", vendor);
-      const newVendor = await Vendor.addVendorByFirebaseId(
-        vendor,
-        firebase_id
-      );
-      console.log("Added vendor", newVendor);
-      res.status(200).json(newVendor);
-    }
+    let vendor = req.body;
+    const newVendor = await Vendor.addVendorByFirebaseId(
+      vendor,
+      firebase_id
+    );
+    if (newVendor) {
+      const cart = await Cart.addCart(firebase_id)
+      console.log("Added vendor", newVendor, cart);
+      console.log(cart, 'vendor cart')
+      res.status(200).json({newVendor, cart});
+    } 
+    // else if (!newVendor) {
+      
+    //         // res.status(404).json({ message: `You are missing firebase Id` });
+
+    //   // console.log(firebase_id, 'vendor id')
+     
+    //   console.log("Vendor", vendor);
+    //   const newVendor = await Vendor.addVendorByFirebaseId(
+    //     vendor,
+    //     firebase_id
+    //   );
+     
+    // }
   } catch (err) {
     res.status(500).json(`Can not add vendor: ${err}`);
     console.log(err);
