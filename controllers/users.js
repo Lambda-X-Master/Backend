@@ -3,8 +3,9 @@ const db = require("../database/dbconfig");
 
 exports.findUsers = async (req, res, next) => {
   try {
+    const noob = req.body
     const usersData = await Users.find();
-    // console.log(usersData);
+    console.log('ok',noob);
     res.status(200).json(usersData);
   } catch (err) {
     res.status(500).json(`No users found`);
