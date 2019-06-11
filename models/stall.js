@@ -4,6 +4,11 @@ async function getStalls() {
     return db("stall").select("id","size", "market_id", "available","qty");
 }
 
+getStallsById = (id)  => {
+    return db('stall')
+        .where({id})
+}
+
 async function getStallsByMarketId(marketId) {
     try{
         return db("stall").where({market_id: marketId})
@@ -46,8 +51,11 @@ async function deleteStallByStallId(stallId) {
     }
 }
 
+
+
 module.exports = {
     getStalls,
+    getStallsById,
     getStallsByMarketId,
     addStallByMarketId,
     updateStallByStallId,

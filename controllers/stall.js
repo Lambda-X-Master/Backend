@@ -1,4 +1,5 @@
 const Stalls = require("../models/stall");
+const db = require('../database/dbconfig');
 
 exports.getStalls =  async (req, res, next) => {
     try{
@@ -8,6 +9,19 @@ exports.getStalls =  async (req, res, next) => {
     catch(err) {
         res.status(500).json(`No stalls found: ${err}`);
         console.log(err);
+    }
+}
+
+exports.getStallsById = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        console.log(id)
+        const stall = await Stalls.getStallsById(id)
+        // console.log(stall)
+        res.status(200).json(stall)
+    } catch (err) {
+        res.status(500).json({message: `error getting stall`})
+        console.log(err, 'error from stall by id')
     }
 }
 
