@@ -47,7 +47,7 @@ async function addProductByVendorId(product, vendorId) {
 async function updateProductByProductId(product, productId) {
     try{
         console.log("Updated product :", product);
-        return db("product").where({id: productId}).update(product);
+        return db("product").where({id: productId}).update(product, '*');
     }
     catch(err){
         console.log(err);
