@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
         vendor.string('city')
         vendor.string('state')
         vendor.string('zip_code')
-        vendor.string('phone_nunmber')
+        vendor.string('phone_number')
         vendor.string('company_url')
         vendor
           .string('market_id')

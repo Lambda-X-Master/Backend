@@ -1,4 +1,4 @@
-const Market = require('../models/market');
+const market = require('../models/market');
 const user = require('../models/users');
 
 exports.getAllMarkets = async (req, res, next) => {
@@ -11,13 +11,14 @@ exports.getAllMarkets = async (req, res, next) => {
     }
 }
 
+//Add new market
 exports.addMarket = async (req, res) => {
   try {
-    const newMarket = req.body;
-    if (newMarket) {
-      const market = await Market.addMarket(newMarket);
-      console.log(market, "market added");
-      res.status(200).json(market);
+    const marketData  = req.body;
+    if (marketData) {
+      const newMarket = await market.addMarket(marketData);
+      console.log(newMarket, "market added");
+      res.status(200).json(newMarket);
     } else {
       res.status(400).json({ message: "Must enter all input fields" });
     }
@@ -28,13 +29,34 @@ exports.addMarket = async (req, res) => {
   }
 };
 
+exports.addMarketByFirebaseId = async (req, res) => {
+  try {
+    const firebase_id = req.params.firebaseId;
+    if (!firebase_id) {
+      res.status(404).json({ message: `You are missing firebase Id` });
+    } else {
+      let addedMarket = req.body;
+      console.log("Market", addedMarket);
+      const newMarket = await market.addMarketByFirebaseId(
+        addedMarket,
+        firebase_id
+      );
+      console.log("Added market", newMarket);
+      res.status(200).json(newMarket);
+    }
+  } catch (err) {
+    res.status(500).json(`Can not add market: ${err}`);
+    console.log(err);
+  }
+};
+
 //Market by ID
 exports.getMarketById = async (req, res, next) => {
     try {
         const firebase_id = req.params.id;
         console.log(firebase_id, 'get by id' );
         if (firebase_id) {
-            const marketinfo = await Market.findByMarketID(firebase_id)
+            const marketinfo = await market.findByMarketFirebaseID(firebase_id)
             console.log(marketinfo)
             res.status(200).json(marketinfo);
         } else {
