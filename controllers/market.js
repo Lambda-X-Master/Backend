@@ -12,19 +12,43 @@ exports.getAllMarkets = async (req, res, next) => {
 }
 
 //Add new market
-exports.addMarket = async (req, res, next) => {
-    try {
-        const id = req.params.id;
-        console.log(id, 'id from add market')
-        const marketData = req.body
-        const newMarket = await market.addMarket(marketData, id)
-        console.log(newMarket)
-        res.status(201).json(newMarket)
-    } catch (err) {
-        res.status(500).json(`error adding market`)
-        console.log(err, 'error from add market')
+exports.addMarket = async (req, res) => {
+  try {
+    const marketData  = req.body;
+    if (marketData) {
+      const newMarket = await market.addMarket(marketData);
+      console.log(newMarket, "market added");
+      res.status(200).json(newMarket);
+    } else {
+      res.status(400).json({ message: "Must enter all input fields" });
     }
-}
+  } catch (error) {
+    res.status(500).json({
+      error: `There was an error adding market to the database: ${error}`
+    });
+  }
+};
+
+exports.addMarketByFirebaseId = async (req, res) => {
+  try {
+    const firebase_id = req.params.firebaseId;
+    if (!firebase_id) {
+      res.status(404).json({ message: `You are missing firebase Id` });
+    } else {
+      let addedMarket = req.body;
+      console.log("Market", addedMarket);
+      const newMarket = await market.addMarketByFirebaseId(
+        addedMarket,
+        firebase_id
+      );
+      console.log("Added market", newMarket);
+      res.status(200).json(newMarket);
+    }
+  } catch (err) {
+    res.status(500).json(`Can not add market: ${err}`);
+    console.log(err);
+  }
+};
 
 //Market by ID
 exports.getMarketById = async (req, res, next) => {

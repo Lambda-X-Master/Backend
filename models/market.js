@@ -41,7 +41,7 @@ function updateByMarketId(firebaseId, changes) {
     .update(changes);
 }
 
-async function addMarket(market, firebaseId) {
+async function addMarketByFirebaseId(market, firebaseId) {
   try {
     let addedMarket = {
       ...market,
@@ -56,11 +56,19 @@ async function addMarket(market, firebaseId) {
   }
 }
 
+async function addMarket(market) {
+  const [id] = await db("market")
+    .insert(market)
+    .returning("id");
+  return findByMarketID(id);
+}
+
 module.exports = {
     findAllMarkets,
     findByMarketID,
     deleteByMarketId,
     updateByMarketId,
     addMarket,
-    findByMarketFirebaseID
+    findByMarketFirebaseID,
+    addMarketByFirebaseId
 }
