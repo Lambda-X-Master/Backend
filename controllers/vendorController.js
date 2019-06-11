@@ -1,5 +1,6 @@
 const Vendor = require("../models/vendor");
 const Market = require("../models/market");
+const Cart = require('../models/cart');
 const db = require("../database/dbconfig");
 
 exports.getVendors = async (req, res, next) => {
@@ -15,9 +16,12 @@ exports.getVendors = async (req, res, next) => {
 exports.getVendorById = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id, 'vendor id')
     if (id) {
       const vendor = await Vendor.getVendorById(id);
-      res.status(200).json(vendor);
+      
+      console.log(vendor, 'vendor by id')
+      res.status(200).json({vendor, vendorCart});
     } else {
       res.status(400).json({ message: "No Vendor with that firebase Id" });
     }
@@ -31,18 +35,43 @@ exports.getVendorById = async (req, res) => {
 exports.getVendorByFirebaseId = async (req, res) => {
   try {
     const { firebase_id } = req.params;
+    console.log(firebase_id, 'vendor id')
     if (firebase_id) {
       const vendor = await Vendor.getVendorByfirebaseId(firebase_id);
-      res.status(200).json(vendor);
+      const vendorCart = await Cart.getVendorCart(firebase_id)
+      // console.log(vendorCart, 'vendor by id')
+      res.status(200).json({vendor, vendorCart});
     } else {
       res.status(400).json({ message: "No Vendor with that firebase Id" });
     }
   } catch (error) {
+    console.log(error, 'error from vendor by firebase id')
+
     res
       .status(500)
       .json({ error: `Vendor could not be found in the database: ${error}` });
   }
 };
+
+// exports.addVendor = async (req, res) => {
+//   try {
+//     const newVendor = req.body;
+//     // console.log(newVendor);
+//     if (newVendor) {
+//       const vendor = await Vendor.addVendor(newVendor);
+      
+//       res.status(200).json(vendor);
+//     } else {
+//       res.status(400).json({ message: "Must enter all input fields" });
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       error: `There was an error while adding vendor to the database: ${error}`,
+     
+//     });
+//     console.log(error, 'add vendor error')
+//   }
+// };
 
 exports.addVendor = async (req, res) => {
   try {
@@ -50,15 +79,17 @@ exports.addVendor = async (req, res) => {
     // console.log(newVendor);
     if (newVendor) {
       const vendor = await Vendor.addVendor(newVendor);
-      //   console.log(vendor, "vendor added");
+      
       res.status(200).json(vendor);
     } else {
       res.status(400).json({ message: "Must enter all input fields" });
     }
   } catch (error) {
     res.status(500).json({
-      error: `There was an error while adding vendor to the database: ${error}`
+      error: `There was an error while adding vendor to the database: ${error}`,
+     
     });
+    console.log(error, 'add vendor error')
   }
 };
 
@@ -94,7 +125,7 @@ exports.deleteVendor = async (req, res) => {
 exports.getVendorByMarketFirebaseId = async (req, res) => {
   const { firebaseId } = req.params;
   try {
-    const market = await Market.getMarketByfirebaseId(firebaseId);
+    const market = await Market.findByMarketFirebaseID(firebaseId);
     const vendors = await Vendor.getVendorByMarketFirebaseId(firebaseId);
     if (market) {
       res.status(200).json({ ...market, vendors });
