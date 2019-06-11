@@ -7,9 +7,9 @@ const isAuthenticated = require("../middleware/firebase.js");
 
 router.get('/', marketController.getAllMarkets);
 router.get('/:id', marketController.getMarketById);
-router.post('/:id/add-market', marketController.addMarket);
+router.post('/:firebaseId/add-market', marketController.addMarketByFirebaseId);
 router.put('/:id', marketController.editMarket);
 router.delete('/:id', marketController.deleteMarket);
 router.post('/', marketController.addMarket);
 
-module.exports = router
+module.exports = router;

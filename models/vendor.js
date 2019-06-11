@@ -8,7 +8,8 @@ module.exports = {
   deleteVendor,
   findVendorBy,
   getVendorByfirebaseId,
-  getVendorByMarketFirebaseId
+  getVendorByMarketFirebaseId,
+  addVendorByFirebaseId
 };
 
 function getVendors() {
@@ -45,7 +46,24 @@ async function addVendor(vendor) {
   return getVendorById(id);
 }
 
+<<<<<<< HEAD
 
+=======
+async function addVendorByFirebaseId(vendor, firebaseId) {
+  try {
+    let addedVendor = {
+      ...vendor,
+      firebase_id: firebaseId
+    };
+    const [id] = await db("vendor")
+      .insert(addedVendor)
+      .returning("id");
+    return getVendorById(id);
+  } catch (err) {
+    console.log(err);
+  }
+}
+>>>>>>> 41dedcee7daac5be4edfb81947b919ec86f72561
 
 function updateVendor(firebase_id, changes) {
   return db("vendor")
