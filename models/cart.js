@@ -10,8 +10,8 @@ getCartById = (id) => {
     .first()
   }
 
-addCart = (cart, id) => {
-    return db('cart').insert(cart).where({'cart.firebase_id': id})
+addCart = (id) => {
+    return db('cart').insert(id).where({'cart.firebase_id': id})
 }
 
 getVendorCart = (id) => {

@@ -45,10 +45,7 @@ async function addVendor(vendor) {
   return getVendorById(id);
 }
 
-// async function addVendor(vendor) {
-//     const [id] = await db("vendor").insert(vendor, "id");
-//     return findVendorBy({ id });
-//   }
+
 
 function updateVendor(firebase_id, changes) {
   return db("vendor")
@@ -67,3 +64,19 @@ function getVendorByMarketFirebaseId(firebaseId) {
     .where({ 'market_id': firebaseId })
     
 }
+
+// async function addVendor(vendor, firebaseId) {
+//   try {
+//     let addedVendor = {
+//       ...vendor,
+//       firebase_id: firebaseId
+//     };
+//     const [id] = await db("vendor")
+//       .insert(addedVendor)
+//       .returning("id");
+//       console.log(id)
+//     return findVendorBy(id);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }

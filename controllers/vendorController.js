@@ -53,14 +53,17 @@ exports.getVendorByFirebaseId = async (req, res) => {
   }
 };
 
+//testing add vendor
 // exports.addVendor = async (req, res) => {
 //   try {
+//     const id = req.params.id
 //     const newVendor = req.body;
 //     // console.log(newVendor);
 //     if (newVendor) {
-//       const vendor = await Vendor.addVendor(newVendor);
-      
-//       res.status(200).json(vendor);
+//       const vendor = await Vendor.addVendor(newVendor, id);
+//       const cart = await Cart.addCart(id)
+//       console.log(cart)
+//       res.status(200).json({vendor});
 //     } else {
 //       res.status(400).json({ message: "Must enter all input fields" });
 //     }

@@ -31,11 +31,11 @@ exports.addCart = async (req, res, next) => {
         console.log(req.body, 'add cart req.body')
         // console.log(id, 'id from add market')
         // const marketData = req.body
-        const newMarket = await cart.addCart(req.body, id)
+        const newMarket = await cart.addCart(id)
         console.log(newMarket)
         res.status(201).json(newMarket)
     } catch (err) {
-        res.status(500).json(`error adding market`)
-        console.log(err, 'error from add market')
+        res.status(500).json(`error adding cart`)
+        console.log(err, 'error from add cart')
     }
 }
