@@ -56,6 +56,8 @@ async function addMarketByFirebaseId(market, firebaseId) {
   }
 }
 
+
+
 async function addMarket(market) {
   const [id] = await db("market")
     .insert(market)
