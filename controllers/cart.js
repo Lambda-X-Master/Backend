@@ -29,13 +29,17 @@ exports.getCarts = async (req, res, next) => {
 exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
+        const cartData = await cart.getCartById(id)
         const cartItem = await cart.getCartItems(id)
+        console.log(cartItem, 'cart item')
         let updatedTotal = 0
         const price = cartItem.forEach(element => {
             return updatedTotal += element.price 
         });
         const roundedTotal = Math.ceil(updatedTotal * 100) / 100
-        res.status(200).json({cartItem, total: roundedTotal})
+        let total = roundedTotal
+        console.log(total, 'total')
+        res.status(200).json({cartItem, total})
     } catch (err) {
         res.status(500).json(err)
         console.log(err, 'error from get cart')

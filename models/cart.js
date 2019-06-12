@@ -53,7 +53,8 @@ async function addCart(firebaseId) {
       return db('cart_item')
         .innerJoin('stall', 'cart_item.stalls_id', 'stall.id')
         .innerJoin('cart', 'cart_item.cart_id', 'cart.firebase_id')
-        .select('cart_item.id', 'stalls_id', 'stall.price', 'stall.size', 'stall.market_id', 'cart.firebase_id', 'cart.id')
+        .innerJoin('market', 'stall.market_id', 'market.firebase_id')
+        .select('cart_item.id as cart_item _id', 'stalls_id', 'stall.price', 'stall.size', 'stall.market_id', 'market.market_name', 'cart.firebase_id as user_firebase_id', 'cart.id')
         .where({'cart_id': id})
   }
 
