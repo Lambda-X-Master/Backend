@@ -1,4 +1,5 @@
 const Stalls = require("../models/stall");
+const Market = require('../models/market');
 const db = require('../database/dbconfig');
 
 exports.getStalls =  async (req, res, next) => {
@@ -33,9 +34,11 @@ exports.getStallsByMarketId =  async (req, res, next) => {
             res.status(404).json({errorMessage: "You are missing a market id"})
         }
         else {
+            //comment marketData out if it gives problem in the frontend
+            const marketData = await Market.findByMarketFirebaseID(marketId)
             const stallData = await Stalls.getStallsByMarketId(marketId);
             console.log("Stall Data:", stallData);
-            res.status(200).json(stallData);
+            res.status(200).json({marketData, stallData});
         }
     }
     catch(err) {
