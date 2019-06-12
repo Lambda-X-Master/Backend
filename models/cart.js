@@ -1,61 +1,66 @@
 const db = require("../database/dbconfig");
 
 getCart = () => {
-    return db('cart').select('cart.id', 'cart.total', 'cart.quantity', 'cart.firebase_id')
+    return db('cart')
+        .select('cart.id',  'cart.firebase_id')
 };
 
 getCartById = (id) => {
     return db('cart')
-    .where({ 'id': id})
+    .where({ 'firebase_id': id})
     .first()
   }
 
-addCart = (cart, id) => {
-    return db('cart').insert(cart).where({'cart.firebase_id': id})
-}
+// addCart = (id) => {
+//     return db('cart')
+//     .insert(id)
+//     .returning(id)
+// }
 
 getVendorCart = (id) => {
     return db('cart')
-        .innerJoin('vendor', 'cart.firebase_id', 'vendor.firebase_id')
-        .select('vendor.contact_fullname', 'cart.total', 'cart.quantity')
-        .where('cart.firebase_id', id)
+        .innerJoin(
+            'vendor', 
+            'cart.firebase_id', 
+            'vendor.firebase_id'
+        )
+        .select('vendor.contact_fullname')
+        .where({'firebase_id': id})
+        // .console.log(firebase_id)
 }
-//   getMarketStalls = (id) => {
-//     return db('stalls')
-//         .innerJoin('market', 'stalls.market_id', 'market.id')
-//         .select('market.name as owned by', 'stalls.name','stalls.size' )
-//         .where('stalls.market_id', id)
+
+// getVendorCart = (id) => {
+//     return db('cart')
+//         .select('vendor.')
+//         .where({'firebase_id': id})
+//         .first()
 // }
 
-// async function addCart() {
-//     try {
-//       let addedCart= {
-//         // ...cart,
-//         firebase_id: firebaseId
-//       };
-//       const [id] = await db('cart')
-//         .insert(addedCart)
-//         .returning("id");
-//       return getCartById(id);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-
-  async function addMarket(market, firebaseId) {
+async function addCart(firebaseId) {
     try {
-      let addedMarket = {
-        ...market,
+      let addedCart= {
+        // ...cart,
         firebase_id: firebaseId
       };
-      const [id] = await db("market")
-        .insert(addedMarket)
+      const [id] = await db('cart')
+        .insert(addedCart)
         .returning("id");
-      return findByMarketID(id);
+      return getCartById(id);
     } catch (err) {
       console.log(err);
     }
   }
+
+  addStallToCart = (stallId, cartId) => {
+      
+        let addedItem = {
+            stallId,
+            cartId
+        }
+        return db('cart-item').insert(addedItem)
+  }
+
+ 
 module.exports = {
     getCartById,
     addCart,
