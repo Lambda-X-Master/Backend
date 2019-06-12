@@ -8,8 +8,8 @@ exports.up = function(knex, Promise) {
         .notNullable()
         .references('firebase_id')
         .inTable('vendor')
-        cart.float('total')
-        cart.integer('quantity')
+        // cart.float('total')
+        // cart.integer('quantity')
     })
   };
   
