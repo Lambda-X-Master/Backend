@@ -57,10 +57,11 @@ exports.getCartById = async (req, res, next) => {
 
 exports.addStallToCart = async (req, res, next) => {
     try {
-        const cartId = req.params.id
-        stall = req.body.id
+        const cart_id = req.params.id;
+        let stalls_id = req.body.stalls_id;
+        // console.log(req, "req");
         console.log(req.body, 'stall fron at to cart')
-        const addedStall = await cart.addStallToCart(stall, cartId)
+        const addedStall = await cart.addStallToCart(stalls_id, cart_id)
         res.status(201).json(addedStall)
     } catch (err) {
         res.status(500).json(`error adding cart`)
