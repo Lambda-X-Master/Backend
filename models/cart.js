@@ -7,7 +7,7 @@ getCart = () => {
 
 getCartById = (id) => {
     return db('cart')
-    .where({ 'firebase_id': id})
+    .where({ firebase_id: id})
     .first()
   }
 
@@ -42,10 +42,13 @@ async function addCart(firebaseId) {
 
   addStallToCart = (stalls_id, cart_id) => {
       
+  
         let addedItem = {
             stalls_id,
             cart_id
         }
+
+        console.log("added item", addedItem);
         return db('cart_item').insert(addedItem)
   }
 
