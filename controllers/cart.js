@@ -12,7 +12,7 @@ exports.getVendorCart = async (req, res, next) => {
     }
 }
 
-exports.getCart = async (req, res, next) => {
+exports.getCarts = async (req, res, next) => {
     try {
         const id = req.params.id
         cartData = await cart.getCart()
@@ -25,16 +25,43 @@ exports.getCart = async (req, res, next) => {
     }
 }
 
-exports.addCart = async (req, res, next) => {
+//currently not storing total to the database will have to look at db diagram later
+exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
-        const cartInfo = req.body
-        console.log(req.body, 'add cart req.body')
-        // console.log(id, 'id from add market')
-        // const marketData = req.body
-        const vendorCart = await cart.addCart(id)
-        console.log(vendorCart)
-        res.status(201).json(vendorCart)
+        const cartItem = await cart.getCartItems(id)
+        let updatedTotal = 0
+        const price = cartItem.forEach(element => {
+            return updatedTotal += element.price 
+        });
+        const roundedTotal = Math.ceil(updatedTotal * 100) / 100
+        res.status(200).json({cartItem, total: roundedTotal})
+    } catch (err) {
+        res.status(500).json(err)
+        console.log(err, 'error from get cart')
+    }
+}
+
+// exports.addCart = async (req, res, next) => {
+//     try {
+//         const id = req.params.id
+//         const cartInfo = req.body
+//         const vendorCart = await cart.addCart(id)
+//         console.log(vendorCart)
+//         res.status(201).json(vendorCart)
+//     } catch (err) {
+//         res.status(500).json(`error adding cart`)
+//         console.log(err, 'error from add cart')
+//     }
+// }
+
+exports.addStallToCart = async (req, res, next) => {
+    try {
+        const cartId = req.params.id
+        stall = req.body.id
+        console.log(req.body, 'stall fron at to cart')
+        const addedStall = await cart.addStallToCart(stall, cartId)
+        res.status(201).json(addedStall)
     } catch (err) {
         res.status(500).json(`error adding cart`)
         console.log(err, 'error from add cart')
