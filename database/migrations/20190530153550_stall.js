@@ -9,8 +9,8 @@
               .notNullable()
               .references('firebase_id')
               .inTable('market')
-            stall.boolean("available");
-            stall.integer("qty");
+            stall.boolean("available")
+            stall.float('price')
         })
       };
 

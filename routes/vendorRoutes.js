@@ -8,6 +8,7 @@ const vendorRouter = express.Router();
 const isAuthenticated = require('../middleware/firebase.js');
 
 vendorRouter.get('/', vendorController.getVendors);
+
 vendorRouter.get('/:firebase_id', vendorController.getVendorByFirebaseId);
 vendorRouter.get('/market/:firebaseId/vendor', vendorController.getVendorByMarketFirebaseId);
 vendorRouter.get('/id/:id', vendorController.getVendorById);
@@ -18,11 +19,7 @@ vendorRouter.post('/', isAuthenticated, vendorController.addVendor);
 vendorRouter.put('/:firebase_id', isAuthenticated, vendorController.updateVendor);
 vendorRouter.delete('/:firebase_id', isAuthenticated, vendorController.deleteVendor);
 
-//test
 
-vendorRouter.post('/:id/add-cart', cartController.addCart);
-// vendorRouter.get('/:id/cart', cartController.getCart)
-// vendorRouter.post('/:id/add-vendor', vendorController.addVendor);
 
 
 module.exports = vendorRouter;

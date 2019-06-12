@@ -184,19 +184,6 @@ exports.addVendorByFirebaseId = async (req, res) => {
       console.log(cart, 'vendor cart')
       res.status(200).json({newVendor, cart});
     } 
-    // else if (!newVendor) {
-      
-    //         // res.status(404).json({ message: `You are missing firebase Id` });
-
-    //   // console.log(firebase_id, 'vendor id')
-     
-    //   console.log("Vendor", vendor);
-    //   const newVendor = await Vendor.addVendorByFirebaseId(
-    //     vendor,
-    //     firebase_id
-    //   );
-     
-    // }
   } catch (err) {
     res.status(500).json(`Can not add vendor: ${err}`);
     console.log(err);
