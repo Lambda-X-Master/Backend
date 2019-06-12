@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
             .inTable("users")
             .onUpdate("CASCADE");
         vendor.string('company_name')
-        vendor.string('c ontact_fullname')
+        vendor.string('contact_fullname')
         vendor.string('address')
         vendor.string('city')
         vendor.string('state')
