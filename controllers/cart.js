@@ -33,27 +33,43 @@ exports.getCarts = async (req, res, next) => {
     }
 }
 
+// exports.getCartById = async (req, res, next) => {
+//     try {
+//         const id = req.params.id
+//         // const cartData = await Cart.getCartById(id)
+//         const cartItem = await Cart.getCartItems(id)
+//         // console.log(cartData, 'cart item')
+//         let updatedTotal = 0
+//         const price = cartItem.forEach(element => {
+//             return updatedTotal += element.price 
+//         });
+//         const roundedTotal = Math.ceil(updatedTotal * 100) / 100
+//         let total = roundedTotal
+//         console.log(total, 'total')
+//         res.status(200).json({cartItem, total})
+//     } catch (err) {
+//         res.status(500).json(err)
+//         console.log(err, 'error from get cart')
+//     }
+// }
+
+//test
+
 exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
-        // const cartData = await Cart.getCartById(id)
         const cartItem = await Cart.getCartItems(id)
-        // console.log(cartData, 'cart item')
         let updatedTotal = 0
         const price = cartItem.forEach(element => {
             return updatedTotal += element.price 
         });
         const roundedTotal = Math.ceil(updatedTotal * 100) / 100
-        let total = roundedTotal
-        console.log(total, 'total')
-        res.status(200).json({cartItem, total})
+        res.status(200).json({cartItem, total: roundedTotal})
     } catch (err) {
         res.status(500).json(err)
         console.log(err, 'error from get cart')
     }
 }
-
-//test
 
 
 
