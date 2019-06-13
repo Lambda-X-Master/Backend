@@ -29,7 +29,7 @@ exports.getCarts = async (req, res, next) => {
 exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
-        const cartItem = await cart.getCartItems(id)
+        const cartItem = await Cart.getCartItems(id)
         let updatedTotal = 0
         const price = cartItem.forEach(element => {
             return updatedTotal += element.price 
