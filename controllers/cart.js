@@ -68,3 +68,17 @@ exports.addStallToCart = async (req, res, next) => {
         console.log(err, 'error from add cart')
     }
 }
+
+exports.removeStallFromCart = async (req, res, next) => {
+    try{
+        const cart_id = req.params.id;
+        let stalls_id = req.body.stalls_id;
+        // console.log(req, "req");
+        console.log(req.body, 'deletedStall')
+        const removedStall = await cart.removeStallFromCart(stalls_id, cart_id)
+        res.status(201).json(removedStall)
+        } catch (err) {
+            res.status(500).json(`error removing cart`)
+            console.log(err, 'error from removing cart')
+        }
+}

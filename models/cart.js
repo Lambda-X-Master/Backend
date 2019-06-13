@@ -52,6 +52,18 @@ async function addCart(firebaseId) {
         return db('cart_item').insert(addedItem)
   }
 
+  removeStallFromCart = (stalls_id, cart_id) => {
+      
+  
+    let deletedItem = {
+        stalls_id,
+        cart_id
+    }
+
+    console.log("deleted item",deletedItem);
+    return db('cart_item').where({stalls_id: stalls_id, cart_id: cart_id}).delete();
+}
+
   getCartItems = (id) => {
       return db('cart_item')
         .innerJoin('stall', 'cart_item.stalls_id', 'stall.id')
@@ -67,5 +79,6 @@ module.exports = {
     getCart,
     getVendorCart,
     addStallToCart,
-    getCartItems
+    getCartItems, 
+    removeStallFromCart
 }
