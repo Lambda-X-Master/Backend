@@ -37,6 +37,7 @@ router.get('/authorize', (req, res) => {
     
     });
 
+    //Martket Token 
     router.get('/token', async (req, res) => {
       // Check the `state` we got back equals the one we generated before proceeding (to protect from CSRF)
       // if (req.session != req.query.state) {

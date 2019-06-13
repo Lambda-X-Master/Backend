@@ -1,10 +1,18 @@
-const cart = require('../models/cart');
+const Cart = require('../models/cart');
+require('dotenv').config()
+
+const stripe = require('stripe')(process.env.STRIPE_SK);
+const querystring = require('querystring');
+const express = require('express');
+const router = express.Router();
+const config = require('../config.default');
+const request = require('request');
 
 exports.getVendorCart = async (req, res, next) => {
     try {
         // const id = req.params.id
         console.log(typeof id, 'get cart id')
-        const vendorCart = await cart.getCartById(req.params.id)
+        const vendorCart = await Cart.getCartById(req.params.id)
         res.status(200).json(vendorCart)
     } catch (err) {
         res.status(500).json({message: `error getting vendors cart`})
@@ -15,7 +23,7 @@ exports.getVendorCart = async (req, res, next) => {
 exports.getCarts = async (req, res, next) => {
     try {
         const id = req.params.id
-        cartData = await cart.getCart()
+        cartData = await Cart.getCart()
         console.log(req.body)
         res.status(200).json(cartData)
         console.log(cartData, 'cart created')
@@ -25,12 +33,11 @@ exports.getCarts = async (req, res, next) => {
     }
 }
 
-//currently not storing total to the database will have to look at db diagram later
 exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
-        const cartData = await cart.getCartById(id)
-        const cartItem = await cart.getCartItems(id)
+        const cartData = await Cart.getCartById(id)
+        const cartItem = await Cart.getCartItems(id)
         console.log(cartItem, 'cart item')
         let updatedTotal = 0
         const price = cartItem.forEach(element => {
@@ -46,28 +53,127 @@ exports.getCartById = async (req, res, next) => {
     }
 }
 
-// exports.addCart = async (req, res, next) => {
-//     try {
-//         const id = req.params.id
-//         const cartInfo = req.body
-//         const vendorCart = await cart.addCart(id)
-//         console.log(vendorCart)
-//         res.status(201).json(vendorCart)
-//     } catch (err) {
-//         res.status(500).json(`error adding cart`)
-//         console.log(err, 'error from add cart')
-//     }
-// }
 
 exports.addStallToCart = async (req, res, next) => {
     try {
         const cartId = req.params.id
         stall = req.body.id
         console.log(req.body, 'stall fron at to cart')
-        const addedStall = await cart.addStallToCart(stall, cartId)
+        const addedStall = await Cart.addStallToCart(stall, cartId)
         res.status(201).json(addedStall)
     } catch (err) {
         res.status(500).json(`error adding cart`)
         console.log(err, 'error from add cart')
+    }
+}
+
+// exports.checkout = async (req, res, next) => {
+//     try {
+        //send back from the front end the cart total and the token from stripe.js element
+        // const { token, amt, stripe_account } = req.body
+        // console.log(token, 'token')
+        //create a customer 
+        // const customer = await stripe.customers.create({
+        //     email: token.email,
+        //     source: token.id
+        // })
+
+        // await stripe.charges.create(
+        //             {
+        //               amount: amt * 100,
+        //               currency: "usd",
+        //               customer: customer.id,
+        //               receipt_email: token.email,
+        //               description: `Purchased stalls`,
+        //               application_fee_amount: 250
+        //             },
+        //             {
+        //             stripe_account: stripe_account
+        //             }
+        //           )
+
+        //           console.log('Charge')
+//         "amt": 10,
+// "stripe_account": "acct_1EkaDZFQYZyXJBpt"
+        // if (customer) {
+        //     const charge = await stripe.charges.create(
+        //         {
+        //           amount: amt * 100,
+        //           currency: "usd",
+        //           customer: customer.id,
+        //           receipt_email: token.email,
+        //           description: `Purchased stalls`,
+        //           application_fee_amount: 250
+        //         },
+        //         {
+        //         stripe_account: stripe_account
+        //         }
+        //       );
+    
+        //       console.log("Charge:", {charge});
+        // }
+        
+          
+        // .then(customer => {
+            
+        //     console.log(customer, 'stripe cutomer data')
+        //     const charge = stripe.charges.create({
+        //         amount: amt * 100,
+        //         currency: 'usd',
+        //         application_fee_amount: 250,
+        //         customer: customer.id
+        //     },
+        //         {
+        //             stripe_account: stripe_account
+        //         })
+        //         console.log(charge, 'Charge completed')
+        // })
+      
+        // res.status(200).json(customer)
+
+        // stripe.charges.create({
+        //     amount: amount * 100,
+        //     currency: "usd",
+        //     source: token,
+        //     application_fee_amount: 150,
+        //   }, {
+        //     stripe_account: stripe_account,
+        //   }).then(function(charge) {
+        //     try {
+        //       res.status(200).json(charge)
+        //     } catch (err) {
+        //       console.log(err)
+        //     }
+         
+        //   });
+//     } catch (err) {
+//         res.status(500).json(err)
+//         console.log('error from checkout', err)
+//     }
+// }
+
+exports.checkout = async (req, res, next) => {
+    try {
+        const {token, amt, stripe_account, } = req.body
+        const charge = await stripe.charges.create(
+                    {
+                      amount: amt * 100,
+                      currency: "usd",
+                    //   customer: customer.id,
+                      receipt_email: token.email,
+                      description: `Purchased stalls`,
+                      application_fee_amount: 150,
+                      source: token.id
+                    },
+                    {
+                    stripe_account: stripe_account
+                    }
+                  );
+        console.log('Charge', {charge})
+        res.status(201).json(charge)
+
+    } catch (err) {
+        res.status(500).json(err)
+        console.log('error from pay', err)
     }
 }
