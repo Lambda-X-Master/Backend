@@ -23,7 +23,7 @@ function getVendorById(id) {
 }
 function getVendorByfirebaseId(firebase_id) {
     return db("vendor")
-      .where({ 'firebase_id': firebase_id })
+      .where({'firebase_id': firebase_id })
       .first();
   }
 
@@ -78,3 +78,19 @@ function getVendorByMarketFirebaseId(firebaseId) {
     .where({ 'market_id': firebaseId })
     
 }
+
+// async function addVendor(vendor, firebaseId) {
+//   try {
+//     let addedVendor = {
+//       ...vendor,
+//       firebase_id: firebaseId
+//     };
+//     const [id] = await db("vendor")
+//       .insert(addedVendor)
+//       .returning("id");
+//       console.log(id)
+//     return findVendorBy(id);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
