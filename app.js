@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const session = require('cookie-session')
 const cookieParser = require('cookie-parser')
 const config = require('./config.default');
+const passport = require('passport');
 
 const usersRoutes = require('./routes/users');
 const vendorRoutes = require('./routes/vendorRoutes.js');
@@ -12,6 +13,9 @@ const marketRoutes = require('./routes/market');
 const stallsRoutes = require("./routes/stall");
 const stripe = require('./routes/stripe');
 const app = express()
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set('trust proxy', true);
 app.use(express.json());
