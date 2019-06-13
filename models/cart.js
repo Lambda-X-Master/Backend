@@ -7,7 +7,7 @@ getCart = () => {
 
 getCartById = (id) => {
     return db('cart')
-    .where({ 'firebase_id': id})
+    .where({ firebase_id: id})
     .first()
   }
 
@@ -42,18 +42,33 @@ async function addCart(firebaseId) {
 
   addStallToCart = (stalls_id, cart_id) => {
       
+  
         let addedItem = {
             stalls_id,
             cart_id
         }
+
+        console.log("added item", addedItem);
         return db('cart_item').insert(addedItem)
   }
+
+  removeStallFromCart = (stalls_id, cart_id) => {
+      
+  
+    let deletedItem = {
+        stalls_id,
+        cart_id
+    }
+
+    console.log("deleted item",deletedItem);
+    return db('cart_item').where({stalls_id: stalls_id, cart_id: cart_id}).delete();
+}
 
   getCartItems = (id) => {
       return db('cart_item')
         .innerJoin('stall', 'cart_item.stalls_id', 'stall.id')
         .innerJoin('cart', 'cart_item.cart_id', 'cart.firebase_id')
-        .innerJoin('market', 'stall.market_id', 'market.firebase_id')
+        .innerJoin('market', 'stall.market_id',  'market.stripeAccountId')
         .select('cart_item.id as cart_item _id', 'stalls_id', 'stall.price', 'stall.size', 'stall.market_id', 'market.market_name', 'cart.firebase_id as user_firebase_id', 'cart.id')
         .where({'cart_id': id})
   }
@@ -65,5 +80,6 @@ module.exports = {
     getCart,
     getVendorCart,
     addStallToCart,
-    getCartItems
+    getCartItems, 
+    removeStallFromCart
 }

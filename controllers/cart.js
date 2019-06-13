@@ -36,9 +36,9 @@ exports.getCarts = async (req, res, next) => {
 exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
-        const cartData = await Cart.getCartById(id)
+        // const cartData = await Cart.getCartById(id)
         const cartItem = await Cart.getCartItems(id)
-        console.log(cartItem, 'cart item')
+        // console.log(cartData, 'cart item')
         let updatedTotal = 0
         const price = cartItem.forEach(element => {
             return updatedTotal += element.price 
@@ -53,13 +53,17 @@ exports.getCartById = async (req, res, next) => {
     }
 }
 
+//test
+
+
 
 exports.addStallToCart = async (req, res, next) => {
     try {
-        const cartId = req.params.id
-        stall = req.body.id
+        const cart_id = req.params.id;
+        let stalls_id = req.body.stalls_id;
+        // console.log(req, "req");
         console.log(req.body, 'stall fron at to cart')
-        const addedStall = await Cart.addStallToCart(stall, cartId)
+        const addedStall = await Cart.addStallToCart(stalls_id, cart_id)
         res.status(201).json(addedStall)
     } catch (err) {
         res.status(500).json(`error adding cart`)
@@ -176,4 +180,17 @@ exports.checkout = async (req, res, next) => {
         res.status(500).json(err)
         console.log('error from pay', err)
     }
+}
+exports.removeStallFromCart = async (req, res, next) => {
+    try{
+        const cart_id = req.params.id;
+        let stalls_id = req.body.stalls_id;
+        // console.log(req, "req");
+        console.log(req.body, 'deletedStall')
+        const removedStall = await Cart.removeStallFromCart(stalls_id, cart_id)
+        res.status(201).json(removedStall)
+        } catch (err) {
+            res.status(500).json(`error removing cart`)
+            console.log(err, 'error from removing cart')
+        }
 }

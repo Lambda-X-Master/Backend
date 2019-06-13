@@ -19,8 +19,8 @@ exports.getVendorById = async (req, res) => {
     console.log(id, 'vendor id')
     if (id) {
       const vendor = await Vendor.getVendorById(id);
-      
-      console.log(vendor, 'vendor by id')
+      const vendorCart = await Cart.getCartById(id)
+      console.log(vendorCart, 'vendor cart')
       res.status(200).json({vendor, vendorCart});
     } else {
       res.status(400).json({ message: "No Vendor with that firebase Id" });
@@ -35,7 +35,7 @@ exports.getVendorById = async (req, res) => {
 exports.getVendorByFirebaseId = async (req, res) => {
   try {
     const { firebase_id } = req.params;
-    console.log(firebase_id, 'vendor id')
+    // console.log(firebase_id, 'vendor id')
     if (firebase_id) {
       const vendor = await Vendor.getVendorByfirebaseId(firebase_id);
       const vendorCart = await Cart.getCartById(firebase_id)
