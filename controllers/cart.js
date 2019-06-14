@@ -1,5 +1,4 @@
 const Cart = require('../models/cart');
-<<<<<<< HEAD
 require('dotenv').config()
 
 const stripe = require('stripe')(process.env.STRIPE_SK);
@@ -8,8 +7,6 @@ const express = require('express');
 const router = express.Router();
 const config = require('../config.default');
 const request = require('request');
-=======
->>>>>>> 8abdf4a44d7de54cf87a1f7aa3a721018ad0fd74
 
 exports.getVendorCart = async (req, res, next) => {
     try {
