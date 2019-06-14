@@ -11,7 +11,7 @@ exports.getAllMarkets = async (req, res, next) => {
     }
 }
 
-//Add new market
+//Add new Market
 exports.addMarket = async (req, res) => {
   try {
     const marketData  = req.body;
@@ -24,7 +24,7 @@ exports.addMarket = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({
-      error: `There was an error adding market to the database: ${error}`
+      error: `There was an error adding Market to the database: ${error}`
     });
   }
 };
@@ -41,11 +41,11 @@ exports.addMarketByFirebaseId = async (req, res) => {
         addedMarket,
         firebase_id
       );
-      console.log("Added market", newMarket);
+      console.log("Added Market", newMarket);
       res.status(200).json(newMarket);
     }
   } catch (err) {
-    res.status(500).json(`Can not add market: ${err}`);
+    res.status(500).json(`Can not add Market: ${err}`);
     console.log(err);
   }
 };
@@ -60,7 +60,7 @@ exports.getMarketById = async (req, res, next) => {
             console.log(marketinfo)
             res.status(200).json(marketinfo);
         } else {
-            res.status(400).json({message: `No market by that id found`})
+            res.status(400).json({message: `No Market by that id found`})
         }
   
     }
@@ -95,6 +95,6 @@ exports.editMarket = async (req, res, next) => {
         
       } catch (error) {
           console.log(error)
-        res.status(500).json({ message: `Error updating market: ${error}` });
+        res.status(500).json({ message: `Error updating Market: ${error}` });
       }
 }
