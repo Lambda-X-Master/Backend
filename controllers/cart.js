@@ -5,7 +5,6 @@ const stripe = require('stripe')(process.env.STRIPE_SK);
 const querystring = require('querystring');
 const express = require('express');
 const router = express.Router();
-const config = require('../config.default');
 const request = require('request');
 
 exports.getVendorCart = async (req, res, next) => {
