@@ -7,7 +7,7 @@ getCart = () => {
 
 getCartById = (id) => {
     return db('cart')
-    .where({ 'firebase_id': id})
+    .where({ firebase_id: id})
     .first()
   }
 
