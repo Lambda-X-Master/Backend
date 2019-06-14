@@ -7,7 +7,7 @@ getCart = () => {
 
 getCartById = (id) => {
     return db('cart')
-    .where({ 'firebase_id': id})
+    .where({ firebase_id: id})
     .first()
   }
 
@@ -42,12 +42,27 @@ async function addCart(firebaseId) {
 
   addStallToCart = (stalls_id, cart_id) => {
       
+  
         let addedItem = {
             stalls_id,
             cart_id
         }
+
+        console.log("added item", addedItem);
         return db('cart_item').insert(addedItem)
   }
+
+  removeStallFromCart = (stalls_id, cart_id) => {
+      
+  
+    let deletedItem = {
+        stalls_id,
+        cart_id
+    }
+
+    console.log("deleted item",deletedItem);
+    return db('cart_item').where({stalls_id: stalls_id, cart_id: cart_id}).delete();
+}
 
   getCartItems = (id) => {
       return db('cart_item')
@@ -64,5 +79,6 @@ module.exports = {
     getCart,
     getVendorCart,
     addStallToCart,
-    getCartItems
+    getCartItems, 
+    removeStallFromCart
 }

@@ -17,7 +17,7 @@ exports.addMarket = async (req, res) => {
     const marketData  = req.body;
     if (marketData) {
       const newMarket = await Market.addMarket(marketData);
-      console.log(newMarket, "Market added");
+      console.log(newMarket, "market added");
       res.status(200).json(newMarket);
     } else {
       res.status(400).json({ message: "Must enter all input fields" });

@@ -19,8 +19,9 @@ exports.registerOrLogin = async (req, res, next) => {
   try {
     // console.log("Test");
     const { email, user_type } = req.body;
-    // console.log("Our cool request body: ", req.body);
-    const firebase_id = req.user
+    console.log("Our cool request body: ", req);
+    const firebase_id = req.body.uid;
+    console.log("req dot user: ", req.user);
     const registerToUser = await Users.registerOrLogin({ firebase_id, email, user_type });
     res.status(201).json(registerToUser);
   } catch (error) {
