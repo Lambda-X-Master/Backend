@@ -78,7 +78,7 @@ getCartItems = (id) => {
       .innerJoin('stall', 'cart_item.stalls_id', 'stall.id')
       .innerJoin('market', 'stall.market_id', 'market.firebase_id')
       .innerJoin('cart', 'cart_item.cart_id', 'cart.firebase_id')
-      .select('cart_item.id', 'stalls_id', 'stall.price', 'stall.size', 'stall.market_id', 'cart.firebase_id', 'cart.id', 'market.stripeAccountId')
+      .select(['cart_item.id', 'stalls_id', 'stall.price', 'stall.size', 'stall.market_id', 'cart.firebase_id', 'cart.id', 'market.stripeAccountId'])
       .where({'cart_id': id})
 }
 

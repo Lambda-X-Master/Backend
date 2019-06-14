@@ -59,12 +59,14 @@ exports.getCartById = async (req, res, next) => {
     try {
         const id = req.params.id
         const cartItem = await Cart.getCartItems(id)
+        console.log(cartItem, 'cart type')
         let updatedTotal = 0
         const price = cartItem.forEach(element => {
             return updatedTotal += element.price 
         });
-        const roundedTotal = Math.ceil(updatedTotal * 100) / 100
-        res.status(200).json({cartItem, total: roundedTotal})
+        const total = Math.ceil(updatedTotal * 100) / 100
+        res.status(200).json([cartItem, total])
+        console.log(cartItem, 'cart type')
     } catch (err) {
         res.status(500).json(err)
         console.log(err, 'error from get cart')
