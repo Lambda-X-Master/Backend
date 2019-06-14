@@ -12,7 +12,8 @@ findAllMarkets = () => {
             "city", 
             "state", 
             "zipcode", 
-            "phone_number"
+            "phone_number",
+            "stripeAccountId"
         ); 
 }
 
