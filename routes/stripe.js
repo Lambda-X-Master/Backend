@@ -4,7 +4,6 @@ const stripe = require('stripe')(process.env.STRIPE_SK);
 const querystring = require('querystring');
 const express = require('express');
 const router = express.Router();
-const config = require('../config.default');
 const request = require('request');
 
 
@@ -13,15 +12,13 @@ router.get('/authorize', (req, res) => {
   console.log(req.body)
   console.log(req.params)
 
-    req.session.state = Math.random()
-    .toString(36)
-    .slice(2)
+  
     let parameters = {
         client_id: process.env.STRIPE_CLIENT_ID,
-        state: req.session.state
+       
       }
       parameters = Object.assign(parameters, {
-        redirect_uri: 'http://localhost:5000' + '/stripe/token',
+        redirect_uri: 'https://market-organizer.herokuapp.com' + '/stripe/token',
         'stripe_user[business_type]': req.body.type || 'individual',
         'stripe_user[business_name]': req.body.market_name || undefined,
         'stripe_user[first_name]': req.body.contact_first_name || undefined,
@@ -48,12 +45,12 @@ router.get('/authorize', (req, res) => {
       // Post the authorization code to Stripe to complete the Express onboarding flow
       console.log('req.query', req.query)
         request.post(
-          config.stripe.tokenUri,
+          process.env.STRIPE_TOKEN_URI,
           {
             form: {
               grant_type: 'authorization_code',
-              client_id: config.stripe.clientId,
-              client_secret: config.stripe.secretKey,
+              client_id: process.env.STRIPE_CLIENT_ID,
+              client_secret: process.env.STRIPE_SK,
               code: req.query.code,
             },
             json: true,
