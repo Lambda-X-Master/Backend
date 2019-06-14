@@ -57,7 +57,9 @@ exports.addStallByMarketId = async (req, res, next) => {
         else {
             let stall = req.body;
             console.log("stall: ", stall);
+           
             const addedStall = await Stalls.addStallByMarketId(stall,marketId);
+            
             console.log("Added Stall:", addedStall);
             res.status(200).json(addedStall);
         }
