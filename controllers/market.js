@@ -1,4 +1,4 @@
-const market = require('../models/market');
+const Market = require('../models/market');
 const user = require('../models/users');
 
 exports.getAllMarkets = async (req, res, next) => {
@@ -16,7 +16,7 @@ exports.addMarket = async (req, res) => {
   try {
     const marketData  = req.body;
     if (marketData) {
-      const newMarket = await market.addMarket(marketData);
+      const newMarket = await Market.addMarket(marketData);
       console.log(newMarket, "market added");
       res.status(200).json(newMarket);
     } else {
@@ -56,7 +56,7 @@ exports.getMarketById = async (req, res, next) => {
         const firebase_id = req.params.id;
         console.log(firebase_id, 'get by id' );
         if (firebase_id) {
-            const marketinfo = await market.findByMarketFirebaseID(firebase_id)
+            const marketinfo = await Market.findByMarketFirebaseID(firebase_id)
             console.log(marketinfo)
             res.status(200).json(marketinfo);
         } else {
