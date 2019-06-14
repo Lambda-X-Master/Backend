@@ -37,7 +37,7 @@ exports.addMarketByFirebaseId = async (req, res) => {
     } else {
       let addedMarket = req.body;
       console.log("Market", addedMarket);
-      const newMarket = await market.addMarketByFirebaseId(
+      const newMarket = await Market.addMarketByFirebaseId(
         addedMarket,
         firebase_id
       );
