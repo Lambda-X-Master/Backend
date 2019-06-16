@@ -1,6 +1,7 @@
 const Vendor = require("../models/vendor");
 const Market = require("../models/market");
 const Cart = require('../models/cart');
+const Product = require('../models/product');
 const db = require("../database/dbconfig");
 
 exports.getVendors = async (req, res, next) => {
@@ -134,6 +135,7 @@ exports.deleteVendor = async (req, res) => {
     const { firebase_id } = req.params;
     if (firebase_id) {
       let cart = await Cart.deleteCartByVendorFirebaseId(firebase_id);
+      let product = await Product.deleteProductByVendorFirebaseId(firebase_id)
       let vendor = await Vendor.deleteVendor(firebase_id);
       
       res.status(200).json({ message: `${vendor} with cart ${cart} was deleted` });

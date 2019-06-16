@@ -63,9 +63,16 @@ async function deleteProductByProductId(productId) {
     }
 }
 
+function deleteProductByVendorFirebaseId(id) {
+    return db("product")
+      .where({ 'vendors_id': id })
+      .del();
+  }
+
 module.exports = {
     getProductsByVendorId,
     addProductByVendorId,
     updateProductByProductId,
-    deleteProductByProductId
+    deleteProductByProductId,
+    deleteProductByVendorFirebaseId
 }
