@@ -113,12 +113,30 @@ exports.updateVendor = async (req, res) => {
   }
 };
 
+// exports.deleteVendor = async (req, res) => {
+//   try {
+//     const { firebase_id } = req.params;
+//     if (firebase_id) {
+//       let vendor = await Vendor.deleteVendor(firebase_id);
+//       res.status(200).json({ message: `${vendor} was deleted` });
+//     } else {
+//       res.status(400).json({ message: "No vendor by that id" });
+//     }
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: `There was an error deleting vendor: ${error}` });
+//   }
+// };
+
 exports.deleteVendor = async (req, res) => {
   try {
     const { firebase_id } = req.params;
     if (firebase_id) {
+      let cart = await Cart.deleteCartByVendorFirebaseId(firebase_id);
       let vendor = await Vendor.deleteVendor(firebase_id);
-      res.status(200).json({ message: `${vendor} was deleted` });
+      
+      res.status(200).json({ message: `${vendor} with cart ${cart} was deleted` });
     } else {
       res.status(400).json({ message: "No vendor by that id" });
     }
@@ -182,7 +200,7 @@ exports.addVendorByFirebaseId = async (req, res) => {
       const cart = await Cart.addCart(firebase_id)
       console.log("Added vendor", newVendor, cart);
       console.log(cart, 'vendor cart')
-      res.status(200).json({newVendor, cart});
+      res.status(200).json({...newVendor, cart});
     } 
   } catch (err) {
     res.status(500).json(`Can not add vendor: ${err}`);
