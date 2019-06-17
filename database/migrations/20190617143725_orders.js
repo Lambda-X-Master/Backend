@@ -1,0 +1,19 @@
+
+exports.up = function(knex, Promise) {
+    return knex.schema.createTable('orders', orders => {
+        orders.increments();
+        orders
+        .string('vendor_id')
+        .unsigned()
+        .notNullable()
+        .references('firebase_id')
+        .inTable('vendor')
+        .unique();
+        orders.json('size');
+        orders.float('price');
+    })
+  };
+  
+  exports.down = function(knex, Promise) {
+    return knex.schema.dropTableIfExists('orders')
+  };
