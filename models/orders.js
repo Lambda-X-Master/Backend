@@ -1,7 +1,7 @@
 const db = require("../database/dbconfig");
 
 async function getOrders() {
-    return db("orders").select("id","size", "vendor_id");
+    return db("orders").select("id","size", "vendor_id", "market_id");
 }
 
 getOrderById = (id)  => {
