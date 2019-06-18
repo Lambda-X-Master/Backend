@@ -52,10 +52,13 @@ exports.addOrderByVendorId = async (req, res, next) => {
             res.status(404).json({errorMessage: "You are missing a vendor id"})
         }
         else {
-            let stall = req.body;
-            console.log("stall: ", stall);
+            const orders = req.body;
+            const OrdersToInsert = orders.map(order => ({
+                {vendor_id: vendorId, stall_id: order.stall_id, market_id: order.market_id, size: order.size, price: order.price}
+            }))
+            console.log("OrdersToInsert: ", OrdersToInsert);
            
-            const addedOrder = await Orders.addOrderByVendorId(stall,vendorId)
+            const addedOrder = await Orders.addOrderByVendorId(OrdersToInsert,vendorId)
             
             console.log("Added Order:", addedOrder);
             res.status(200).json(addedOrder);
