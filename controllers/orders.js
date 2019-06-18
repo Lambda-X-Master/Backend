@@ -48,7 +48,7 @@ exports.addOrderByVendorId = async (req, res, next) => {
     try {
         const vendorId = req.params.vendor_id;
         console.log("vendor id,", vendorId);
-        if(!marketId){
+        if(!vendorId){
             res.status(404).json({errorMessage: "You are missing a vendor id"})
         }
         else {
