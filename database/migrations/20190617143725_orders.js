@@ -13,6 +13,11 @@ exports.up = function(knex, Promise) {
         .notNullable()
         .references("id")
         .inTable("stall")
+        orders.string('market_id')
+        .unsigned()
+        .notNullable()
+        .references('firebase_id')
+        .inTable('market');
         orders.json('size');
         orders.float('price');
     })
