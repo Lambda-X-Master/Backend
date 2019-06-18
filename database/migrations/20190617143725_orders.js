@@ -8,19 +8,11 @@ exports.up = function(knex, Promise) {
         .notNullable()
         .references('firebase_id')
         .inTable('vendor')
-        .unique();
-        orders.int("stall_id")
+        orders.integer("stall_id")
         .unsigned()
         .notNullable()
         .references("id")
         .inTable("stall")
-        .unique();
-        orders.string('market_id')
-        .unsigned()
-        .notNullable()
-        .references('market_id')
-        .inTable('stall')
-        .unique();
         orders.json('size');
         orders.float('price');
     })
