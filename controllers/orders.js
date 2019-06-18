@@ -1,5 +1,6 @@
 const Orders = require("../models/orders.js");
 const db = require('../database/dbconfig');
+const Markets = require('../models/market.js');
 
 exports.getOrders =  async (req, res, next) => {
     try{
@@ -35,7 +36,7 @@ exports.getOrdersByVendorId =  async (req, res, next) => {
         else {
             const orders = await Orders.getOrdersByVendorId(vendorId);
             console.log("Order Data:", orders);
-            res.status(200).json({orders});
+            res.status(200).json(orders);
         }
     }
     catch(err) {
@@ -53,9 +54,9 @@ exports.addOrderByVendorId = async (req, res, next) => {
         }
         else {
             const orders = req.body;
-            const OrdersToInsert = orders.map(order => ({
+            const OrdersToInsert = orders.map(order => (
                 {vendor_id: vendorId, stall_id: order.stall_id, market_id: order.market_id, size: order.size, price: order.price}
-            }))
+            ))
             console.log("OrdersToInsert: ", OrdersToInsert);
            
             const addedOrder = await Orders.addOrderByVendorId(OrdersToInsert,vendorId)
@@ -79,10 +80,9 @@ exports.updateOrderByOrderId = async (req, res, next) => {
         }
         else {
             let order = req.body;
-            console.log("stall: ", stall);
             const updatedOrder = await Orders.updateOrderByOrderId(order, orderId);
             console.log("Updated Order:", updatedOrder);
-            res.status(200).json(updatedStall);
+            res.status(200).json(updatedOrder);
         }
     }
     catch(err) {
@@ -115,7 +115,7 @@ exports.removeOrdersByVendorId = async (req, res, next) => {
         const vendorId = req.params.vendorId;
         console.log("vendor ID:", vendorId);
         if(!vendorId){
-            res.status(404).json({errorMessage: "You are missing a stall id"})
+            res.status(404).json({errorMessage: "You are missing a vendor id"})
         }
         else {
             const deletedOrders = await Orders.deleteOrdersByVendorId(vendorId)

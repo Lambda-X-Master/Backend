@@ -21,13 +21,8 @@ async function getOrdersByVendorId(vendorId) {
     }
 }
 
-async function addOrderByVendorId(stall, vendorId) {
+async function addOrderByVendorId(addedOrder, vendorId) {
     try{
-        let addedOrder = {
-            ...stall,
-            vendor_id: vendorId
-        };
-        console.log("Our added order :",addedOrder);
         return db("orders").insert(addedOrder);
     }
     catch(err){

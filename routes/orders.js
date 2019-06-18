@@ -12,6 +12,6 @@ router.get("/vendor/:vendor_id", ordersController.getOrdersByVendorId);
 router.post("/vendor/:vendor_id", ordersController.addOrderByVendorId); 
 router.put("/:order_id", ordersController.updateOrderByOrderId);
 router.delete("/:order_id", ordersController.removeOrderByOrderId);
-router.delete("/vendor/:vendor_id", ordersController.removeOrdersByVendorId);
+router.delete("/vendor/:vendorId", ordersController.removeOrdersByVendorId);
 
 module.exports = router; 
