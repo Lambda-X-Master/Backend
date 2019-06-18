@@ -74,7 +74,7 @@ exports.updateOrderByOrderId = async (req, res, next) => {
     try {
         const orderId = req.params.order_id;
         console.log("vendor ID:", orderId);
-        if(!stallId){
+        if(!orderId){
             res.status(404).json({errorMessage: "You are missing a vendor id"})
         }
         else {
@@ -114,7 +114,7 @@ exports.removeOrdersByVendorId = async (req, res, next) => {
     try {
         const vendorId = req.params.vendorId;
         console.log("vendor ID:", vendorId);
-        if(!orderId){
+        if(!vendorId){
             res.status(404).json({errorMessage: "You are missing a stall id"})
         }
         else {
