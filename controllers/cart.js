@@ -71,8 +71,6 @@ exports.getCartById = async (req, res, next) => {
     }
 }
 
-
-
 exports.addStallToCart = async (req, res, next) => {
     try {
         const cart_id = req.params.id;
@@ -205,6 +203,17 @@ exports.removeStallFromCart = async (req, res, next) => {
         console.log(req.body, 'deletedStall')
         const removedStall = await Cart.removeStallFromCart(stalls_id, cart_id)
         res.status(201).json(removedStall)
+        } catch (err) {
+            res.status(500).json(`error removing cart`)
+            console.log(err, 'error from removing cart')
+        }
+}
+
+exports.clearCartByCartId = async ( req, res, next) => {
+    try{
+        const cart_id = req.params.cart_id;
+        const removedCart = await Cart.removeStallsFromCartByCartId(cart_id)
+        res.status(201).json(removedCart)
         } catch (err) {
             res.status(500).json(`error removing cart`)
             console.log(err, 'error from removing cart')
