@@ -173,6 +173,7 @@ exports.addStallToCart = async (req, res, next) => {
 exports.checkout = async (req, res, next) => {
     try {
         const {token, amt, stripe_account, } = req.body
+        console.log("Checkout amt", amt);
         const charge = await stripe.charges.create(
                     {
                       amount: amt * 100,
