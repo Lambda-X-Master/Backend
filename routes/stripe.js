@@ -61,7 +61,7 @@ router.get('/authorize', (req, res) => {
           (err, response, body) => {
             if (err || body.error) {
               console.log('The Stripe onboarding process has not succeeded.');
-              console.log('err', err, body.err)
+              console.log('err', err, body)
             } else {
               // Update the model and store the Stripe account ID in the datastore:
               // this Stripe account ID will be used to issue payouts to the pilot
