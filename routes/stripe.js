@@ -81,11 +81,13 @@ router.get('/authorize', (req, res) => {
 router.post('/stripe-dashboard', (req, res) => {
 
   const { stripe_acc_id } = req.body
+  console.log(stripe_acc_id)
   stripe.accounts.createLoginLink(
     stripe_acc_id,
     function(err, link) {
       
       if(err) {
+        console.log(err)
         res.status(300).json({message: 'Incorrect account', err})
       } else {
         res.status(200).json(link)
