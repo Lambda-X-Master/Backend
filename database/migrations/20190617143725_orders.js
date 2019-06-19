@@ -19,6 +19,7 @@ exports.up = function(knex, Promise) {
         .references('firebase_id')
         .inTable('market');
         orders.json('size');
+        orders.string("market_name");
         orders.float('price');
     })
   };
