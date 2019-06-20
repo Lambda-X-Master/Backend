@@ -55,7 +55,7 @@ exports.addOrderByVendorId = async (req, res, next) => {
         else {
             const orders = req.body;
             const OrdersToInsert = orders.map(order => (
-                {vendor_id: vendorId, stall_id: order.stall_id, market_id: order.market_id, size: order.size, price: order.price}
+                {vendor_id: vendorId, stall_id: order.stall_id, market_id: order.market_id, market_name: order.market_name, size: order.size, price: order.price}
             ))
             console.log("OrdersToInsert: ", OrdersToInsert);
            
