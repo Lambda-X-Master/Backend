@@ -88,8 +88,19 @@ exports.editMarket = async (req, res, next) => {
     try {
         const firebaseId = req.params.id
         console.log(req.params)
-        const marketData = req.body
-        const updatedMarket = await Market.updateByMarketId(firebaseId, marketData);
+        // const marketData = req.body
+        const { market_name, contact_first_name, contact_last_name, address, city, state, zipcode, phone_number: { textmask } } = req.body
+        const marketObj = {
+          market_name,
+          contact_first_name,
+          contact_last_name,
+          address,
+          city,
+          state,
+          zipcode,
+          phone_number: textmask
+        }
+        const updatedMarket = await Market.updateByMarketId(firebaseId, marketObj);
         console.log(req.body, 'req.body')
           res.status(200).json(updatedMarket)
         
