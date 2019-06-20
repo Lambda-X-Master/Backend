@@ -87,25 +87,30 @@ exports.deleteMarket = async (req, res, next) => {
 exports.editMarket = async (req, res, next) => {
     try {
         const firebaseId = req.params.id
+
+        console.log("rqbody", req.body)
         console.log(req.params)
-        // const marketData = req.body
-        const { market_name, contact_first_name, contact_last_name, address, city, state, zipcode, phone_number: { textmask } } = req.body
+
+        const { market_name, contact_first_name, contact_last_name, address, city, state, zipcode, stripeAccountId, phone_number } = req.body
+        
         const marketObj = {
-          market_name,
-          contact_first_name,
-          contact_last_name,
-          address,
-          city,
-          state,
-          zipcode,
-          phone_number: textmask
-        }
+        stripeAccountId,
+        market_name,
+        contact_first_name,
+        contact_last_name,
+        address,
+        city,
+        state,
+        zipcode,
+        phone_number
+      }
         const updatedMarket = await Market.updateByMarketId(firebaseId, marketObj);
         console.log(req.body, 'req.body')
           res.status(200).json(updatedMarket)
-        
-      } catch (error) {
-          console.log(error)
+
+      }  catch (error) {
+        console.log(error)
         res.status(500).json({ message: `Error updating Market: ${error}` });
-      }
+    } 
+        
 }
