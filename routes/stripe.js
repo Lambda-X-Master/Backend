@@ -8,10 +8,10 @@ const request = require('request');
 
 
 
-router.get('/authorize', (req, res) => {
+router.post('/authorize', (req, res) => {
   console.log(req.body)
   console.log(req.params)
-
+  console.log('requser', req.user)
   
     let parameters = {
         client_id: process.env.STRIPE_CLIENT_ID,
@@ -29,6 +29,7 @@ router.get('/authorize', (req, res) => {
         'stripe_user[zip]': req.body.zipcode || undefined,
         'stripe_user[state]': req.body.state || undefined,
         'stripe_user[country]': req.body.country || undefined,
+        'stripe_user[phone_number]': req.body.phone_number || undefined,
         'suggested_capabilities[]': 'card_payments'
       }),
       console.log('Starting Express flow:', parameters);
@@ -81,11 +82,13 @@ router.get('/authorize', (req, res) => {
 router.post('/stripe-dashboard', (req, res) => {
 
   const { stripe_acc_id } = req.body
+  console.log(stripe_acc_id)
   stripe.accounts.createLoginLink(
     stripe_acc_id,
     function(err, link) {
       
       if(err) {
+        console.log(err)
         res.status(300).json({message: 'Incorrect account', err})
       } else {
         res.status(200).json(link)
