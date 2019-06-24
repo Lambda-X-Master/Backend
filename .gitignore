@@ -61,5 +61,3 @@ typings/
 .next
 
 #s stripe config
-config.default.js
-config.default

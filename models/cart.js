@@ -41,6 +41,12 @@ addStallToCart = (stalls_id, cart_id) => {
   return db("cart_item").insert(addedItem);
 };
 
+removeStallsFromCartByCartId = (cart_id) => {
+  return db("cart_item")
+  .where({ cart_id: cart_id })
+  .delete();
+}
+
 removeStallFromCart = (stalls_id, cart_id) => {
   let deletedItem = {
     stalls_id,
@@ -74,7 +80,8 @@ getCartItems = id => {
       "stall.market_id",
       "cart.firebase_id",
       "cart.id",
-      "market.stripeAccountId"
+      "market.stripeAccountId",
+      "market.market_name",
     ])
     .where({ cart_id: id });
 };
@@ -93,5 +100,6 @@ module.exports = {
   addStallToCart,
   getCartItems,
   removeStallFromCart,
-  deleteCartByVendorFirebaseId
+  deleteCartByVendorFirebaseId,
+  removeStallsFromCartByCartId
 };

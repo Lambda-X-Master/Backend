@@ -1,7 +1,7 @@
 const db = require("../database/dbconfig");
 
 async function getOrders() {
-    return db("orders").select("id","size", "vendor_id");
+    return db("orders").select("id","size", "vendor_id", "market_id");
 }
 
 getOrderById = (id)  => {
@@ -21,13 +21,8 @@ async function getOrdersByVendorId(vendorId) {
     }
 }
 
-async function addOrderByVendorId(stall, vendorId) {
+async function addOrderByVendorId(addedOrder, vendorId) {
     try{
-        let addedOrder = {
-            ...stall,
-            vendor_id: vendorId
-        };
-        console.log("Our added order :",addedOrder);
         return db("orders").insert(addedOrder);
     }
     catch(err){
