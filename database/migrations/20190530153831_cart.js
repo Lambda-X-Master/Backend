@@ -10,7 +10,6 @@ exports.up = function(knex, Promise) {
         .inTable('vendor')
         .unique()
         cart.decimal('total')
-        cart.string("current_market_id");
         // cart.integer('quantity')
     })
   };
