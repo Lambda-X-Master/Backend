@@ -58,8 +58,6 @@ async function deleteOrdersByVendorId(vendorId) {
     }
 }
 
-
-
 module.exports = {
     getOrders,
     getOrderById,

@@ -75,8 +75,7 @@ function deleteVendor(id) {
 
 function getVendorByMarketFirebaseId(firebaseId) {
   return db("vendor")
-    .where({ 'market_id': firebaseId })
-    
+    .where({ 'market_id': firebaseId });    
 }
 
 // async function addVendor(vendor, firebaseId) {
