@@ -75,10 +75,72 @@ exports.addStallToCart = async (req, res, next) => {
     try {
         const cart_id = req.params.id;
         let stalls_id = req.body.stalls_id;
+        let market_id = req.body.market_id;
         // console.log(req, "req");
         console.log(req.body, 'stall fron at to cart')
-        const addedStall = await Cart.addStallToCart(stalls_id, cart_id)
-        res.status(201).json(addedStall)
+        const cartItems = await Cart.getCartItems(cart_id);
+        // const cartItems = [...cartItems, stall]
+        // Object.keys(cartItems.map((item,i) => {
+        //     console.log(`cart market:`, cartItems[i].market_id);
+        //     console.log("checking market id", cartItems[i].market_id === cartItems[i+1].market_id);
+        // }))
+        // // console.log("cart Items:", cartItems.market_id);
+        // console.log("cart Items length", cartItems.length);
+
+        if(cartItems.length == 0) {
+                const addedStall = await Cart.addStallToCart(stalls_id, cart_id)
+                console.log("Sucessful adding of stall: one item in cart");
+                res.status(201).json(addedStall)
+
+                
+
+        
+            // else if (cartItems.length == 1){
+
+            //     if(cartItems[0].market_id != req.body.market_id) {
+            //         console.log("There's one item in the cart with the same market id");
+            //         res.status(404).json(err => { console.log(err.message)})
+            //     }
+            //     else {
+            //         const addedStall = await Cart.addStallToCart(stalls_id, cart_id)
+            //         console.log("Sucessful adding of stall: two items in cart");
+            //         res.status(201).json(addedStall)
+                    
+
+
+            //     }
+            // }
+        }
+        else if (cartItems.length >= 1) {
+
+            console.log("looking at cart items length:", cartItems.length);
+            console.log("on top of for loop");
+            let areTwoDiffMarketId = false; 
+
+            for(let i = 0; i < cartItems.length; i++) {
+
+                console.log(`market_id :`, market_id, `cartItems at ${i} :`,cartItems[i].market_id);
+                if(cartItems[i].market_id != market_id) {
+                    console.log("error");
+                    // res.status(404).json(err => {console.log(err.message)})
+                    areTwoDiffMarketId = true; 
+                    break;
+                }
+            }
+
+            if (areTwoDiffMarketId) {
+                res.status(404).json(err => {console.log(err.message)})
+                console.log("Your stall is different from the market id that is in the cart, and we cannot add.")
+            }
+            else {
+                const addedStall = await Cart.addStallToCart(stalls_id, cart_id);
+                // console.log(`Sucessful adding of stall: ${cartItems[0].length} items in cart`);
+                res.status(201).json(addedStall)
+            }
+        }
+        
+
+        // const addedStall = await Cart.addStallToCart(stalls_id, cart_id)
     } catch (err) {
         res.status(500).json(`error adding cart`)
         console.log(err, 'error from add cart')
