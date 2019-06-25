@@ -13,7 +13,8 @@ findAllMarkets = () => {
             "state", 
             "zipcode", 
             "phone_number",
-            "stripeAccountId"
+            "stripeAccountId",
+            "image"
         ); 
 }
 
