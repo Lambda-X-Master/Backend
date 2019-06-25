@@ -30,7 +30,7 @@ router.post('/authorize', (req, res) => {
         'stripe_user[state]': req.body.state || undefined,
         'stripe_user[country]': req.body.country || undefined,
         'stripe_user[phone_number]': req.body.phone_number || undefined,
-        'suggested_capabilities[]': 'card_payments'
+        'suggested_capabilities[]': 'card_payments',
       }),
       console.log('Starting Express flow:', parameters);
       // Redirect to Stripe to start the Express onboarding flow
