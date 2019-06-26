@@ -6,13 +6,12 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend deployed at [heroku](https://market-organizer.herokuapp.com/) <br>
 
 ## 1️⃣ Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **yarn install** to install all required dependencies
@@ -22,11 +21,12 @@ To get the server running locally:
 ### Backend framework goes here
 
 🚫 Why did you choose this framework?
+  
+Node/Express js
+- Uses Javascript to build web server.
+- light-weight web application framework to help organize web application into an MVC architecture
+- Express makes building REST API simpler
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
 
 ## 2️⃣ Endpoints
 
@@ -55,21 +55,6 @@ To get the server running locally:
 
 🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
-
----
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
-
 #### USERS
 
 ---
@@ -77,18 +62,112 @@ To get the server running locally:
 ```
 {
   id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
   email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  firebase_id: STRING
+  user_type: STRING
 }
 ```
+
+#### MARKET
+---
+
+```
+{
+  id: UUID
+  firebase_id: foreign key reference firebase_id in USERS table
+  market_name: STRING
+  contact_last_first: STRING
+  contact_last_name: STRING
+  address: STRING
+  city: STRING
+  state: STRING
+  zipcode: INT
+  phone_number: INT
+  stripeAccountId: STRING
+  image: STRING
+}
+```
+#### VENDOR
+---
+
+```
+{
+  id: UUID
+  firebase_id: foreign key reference firebase_id in USERS table
+  company_name: STRING
+  contact_fullname: STRING
+  address: STRING
+  city: STRING
+  state: STRING
+  zipcode: INT
+  phone_number: INT
+  company_url: STRING
+  market_id: foreign key reference firebase_id in MARKET table
+  stripeAccountId: STRING
+  image: STRING
+}
+```
+#### STALL
+---
+
+```
+{
+  id: UUID
+  size: json
+  market_id: foreign key reference firebase_id in MARKET table
+  available: BOOLEAN
+  price: INT
+}
+```
+#### CART
+---
+
+```
+{
+  id: UUID
+  firebase_id: foreign key reference firebase_id in VENDOR table
+  total: FLOAT
+}
+```
+#### CART_ITEM
+---
+
+```
+{
+  id: UUID
+  cart_id: foriegn key reference firebase_id in CART table
+  stalls_id: foriegn key reference id in STALL table
+}
+```
+
+#### ORDERS
+---
+
+```
+{
+  id: UUID
+  vendor_id: foreign key reference firebase_id in VENDOR table
+  stall_id: foriegn key reference id in STALL table
+  market_id  foreign key reference firebase_id in MARKET table
+  size: JSON
+  market_name: STRING
+  price: FLOAT
+}
+```
+#### PRODUCTS
+---
+
+```
+{
+  id: UUID
+  title: STRING
+  desciption: STRING
+  price: FLOAT
+  image: STRING
+  vendor_id: foreign key reference firebase_id in VENDOR table
+}
+```
+
 
 ## 2️⃣ Actions
 
@@ -168,5 +247,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/labs-13-market-org/Front-End/blob/master/README.md) for details on the fronend of our project.
+
