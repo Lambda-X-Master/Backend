@@ -19,6 +19,7 @@ exports.up = function(knex, Promise) {
         market.integer("zipcode");
         market.string("phone_number");
         market.string("stripeAccountId");
+        market.string("image");
     })
   };
   
