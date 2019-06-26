@@ -248,4 +248,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Documentation
 
 See [Frontend Documentation](https://github.com/labs-13-market-org/Front-End/blob/master/README.md) for details on the fronend of our project.
+<<<<<<< HEAD
+=======
 
+>>>>>>> f1431cfe2ab1a06178c9d6dc404c0653fd097a3b

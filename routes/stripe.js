@@ -34,7 +34,8 @@ router.post('/authorize', (req, res) => {
       }),
       console.log('Starting Express flow:', parameters);
       // Redirect to Stripe to start the Express onboarding flow
-      res.send(process.env.STRIPE_AUTH_URI + '?' + querystring.stringify(parameters))
+      console.log(process.env.STRIPE_AUTH_URI + '?' + querystring.stringify(parameters))
+      res.status(200).send(process.env.STRIPE_AUTH_URI + '?' + querystring.stringify(parameters))
   
     });
 
